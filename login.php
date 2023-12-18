@@ -1,29 +1,14 @@
 <?php 
 session_start();
+
+include './vendor/autoload.php';
+
+if (isset($_SESSION['session'])) {
+    
+}
+
 include('layouts/header.php')
 ?>
-<?php
-
-require_once('vendor/autoload.php');
-$clientID = "560711140729-geprg7q3niu4g3hd6b958lflls9u9c5p.apps.googleusercontent.com";
-$secret = "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";
-
-// Google API Client
-$gclient = new Google_Client();
-
-// Set the ClientID
-$gclient->setClientId($clientID);
-// Set the ClientSecret
-$gclient->setClientSecret($secret);
-// Set the Redirect URL after successful Login
-$gclient->setRedirectUri('http://localhost/room_rover/login.php');
-
-// Adding the Scopr
-$gclient->addScope('email');
-$gclient->addScope('profile');
-
-?>
-
 <style>
     .main {
         background-color: #656C74;
@@ -107,7 +92,6 @@ $gclient->addScope('profile');
 
 
     <?php include('layouts/navigation.php') ?>
-
 
     <div class="main">
         <div class="box">

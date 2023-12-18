@@ -1,7 +1,16 @@
 <?php
 
 session_start();
+header('Access-Control-Allow-Origin:*');
+header('Access-Control-Allow-Method:POST');
+header('Content-Type:application/json');
 include "DBconn.php";
+include '../vendor/autoload.php';
+
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
+$secret_key = 'room_rover_app';
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
 	function validate($data)
@@ -24,23 +33,32 @@ $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) === 1) {
 	$row = mysqli_fetch_assoc($result);
 	if ($row["username"] === $username && $row["password"] === $hashed_pass) {
-		setcookie("username",$username, time()+3600*2);
-		switch ($row['user_type']) {
-			case 'owner':
-				header('Location: ../owner');
-				break;
-			case 'boarder':
-				header('Location: ../boarder');
-				break;
-			default:
-				die('Invalid user type');
+		$payload = [
+			'iss' => "localhost",
+			'aud' => 'localhost',
+			'data' => [
+				'session_id' => $row["session_id"],
+				'username' => $row["username"],
+				'user_type' => $row["user_type"],
+			],
+		];
+		$jwt = JWT::encode($payload, $secret_key, 'HS256');
+		$_SESSION['session'] = $jwt;
+		$_SESSION['username'] = $row["username"];
+		$_SESSION['user_type'] = $row["user_type"];
+		$_SESSION['session_id'] = $row["session_id"];
+		$_SESSION['id'] = $row["id"];
+
+		echo "<script>console.log(" . $jwt . ");</script>" ;
+		if ($row['user_type'] === "owner") {
+			$url = 'Location: ../owner?session=' . $jwt;
+			header($url);
+			exit();
+		} else if ($row['user_type'] === "boarder") {
+			$url = 'Location: ../boarder?session=' . $jwt;
+			header($url);
+			exit();
 		}
-		if ($_SESSION['user_type'] === "owner") {
-			header('Location: ../owner');
-		} else if ($_SESSION['user_type'] === "boarder") {
-			header('Location: ../boarder');
-		}
-		exit();
 	} else {
 		header("Location: ../login.php");
 		exit();
@@ -50,4 +68,3 @@ if (mysqli_num_rows($result) === 1) {
 	header("Location: ../login.php");
 	exit();
 }
-?>
