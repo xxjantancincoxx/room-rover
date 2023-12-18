@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include('header.php') ?>
+<?php 
+
+session_start();
+include('header.php')
+
+?>
 <style>
 
 </style>
@@ -16,70 +21,16 @@
 
 			<?php include('navbar.php') ?>
 			
+			<?php include('dashboard_content.php') ?>
 		</div>
 	</div>
 
-	<!-- <h2>Collapsible Sidebar Using Bootstrap 4</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-		<div class="line"></div>
-
-		<h2>Lorem Ipsum Dolor</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-		<div class="line"></div>
-
-		<h2>Lorem Ipsum Dolor</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-		<div class="line"></div>
-
-		<h3>Lorem Ipsum Dolor</h3>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	</div> -->
-
-	<!-- <div> -->
-
-	<!--**********************************
-            Nav header start
-        ***********************************-->
-	<!-- <div class="nav-header">
-            <a href="index.html" class="brand-logo">
-                <img src="../assets/images/logorr.png" alt="">
-            </a>
-
-            <div class="nav-control">
-                <div class="hamburger">
-                    <span class="line"></span><span class="line"></span><span class="line"></span>
-                </div>
-            </div>
-        </div> -->
-	<!--**********************************
-            Nav header end
-        ***********************************-->
-
-	<!--**********************************
-            Sub-Header start
-        ***********************************-->
 	<!-- < ?php include('sub-header.php') ?> -->
-	<!--**********************************
-            Sub-Header end ti-comment-alt
-        ***********************************-->
 
-	<!--**********************************
-            Sidebar start
-        ***********************************-->
 	<!-- < ?php include('navigation.php') ?> -->
-	<!--**********************************
-            Sidebar end
-        ***********************************-->
 
-	<!--**********************************
-            Content body start
-        ***********************************-->
 	<!-- <div class="content-body"> -->
-	<!-- row -->
 	<!-- <div class="container-fluid">
 				<div class="form-head d-flex mb-3 mb-md-5 align-items-start">
 					<div class="mr-auto d-none d-lg-block">

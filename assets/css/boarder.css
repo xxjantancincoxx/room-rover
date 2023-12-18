@@ -2,10 +2,12 @@
     DEMO STYLE
 */
 
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+/* html {
+	font-family: 'Poppins', sans-serif !important;
+} */
 
 body {
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Poppins', sans-serif !important;
 	background: #fafafa;
 }
 
@@ -27,11 +29,12 @@ a:focus {
 
 .navbar {
 	padding: 15px 10px;
-	background: #fff;
+	background: #f5f5f5;
 	border: none;
 	border-radius: 0;
 	margin-bottom: 40px;
 	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+	min-height: 40px;
 }
 
 .navbar-btn {
@@ -51,6 +54,10 @@ a:focus {
     SIDEBAR STYLE
 ----------------------------------------------------- */
 
+#sidebarCollapse {
+	background-color: rgba(11, 42, 151, 0.1) !important;
+}
+
 .wrapper {
 	display: flex;
 	width: 100%;
@@ -58,47 +65,62 @@ a:focus {
 }
 
 #sidebar {
-	min-width: 250px;
-	max-width: 250px;
-	background: #7386D5;
-	color: #fff;
+	min-width: 270px;
+	max-width: 21.563rem;
+	/* min-width: 21.563rem; */
+	background: #FFFFFF;
+	color: #7e7e7e;
 	transition: all 0.3s;
+	box-shadow: 0px 0px 10px rgba(120, 130, 140, 0.13);
 }
 
 #sidebar.active {
-	margin-left: -250px;
+	margin-left: -18.1rem;
 }
 
 #sidebar .sidebar-header {
-	padding: 20px;
-	background: #6d7fcc;
+	padding: 20px 20px 0px 20px;
+	text-align: center;
+	/* background: #6d7fcc; */
+
+	span {
+		font-size: 20px;
+	}
 }
 
 #sidebar ul.components {
 	padding: 20px 0;
-	border-bottom: 1px solid #47748b;
+	border-bottom: 1px solid #7e7e7e;
 }
 
 #sidebar ul p {
-	color: #fff;
+	color: #7e7e7e;
 	padding: 10px;
+	margin-left: 15%;
+}
+
+#sidebar ul li {
+	height: 64px;
+	cursor: pointer;
 }
 
 #sidebar ul li a {
 	padding: 10px;
-	font-size: 1.1em;
+	font-size: 16px;
 	display: block;
+	height: inherit;
+	font-weight: bold;
+	line-height: 90px;
 }
 
-#sidebar ul li a:hover {
-	color: #7386D5;
-	background: #fff;
+#sidebar ul li:hover {
+	background: rgba(11, 42, 151, 0.1);
 }
 
-#sidebar ul li.active>a,
-a[aria-expanded="true"] {
-	color: #fff;
-	background: #6d7fcc;
+#sidebar ul li.active {
+	color: #000000 !important;
+	background: rgba(11, 42, 151, 0.1);
+	box-shadow:0px 0px 0px 1px #7e7e7e inset;
 }
 
 a[data-toggle="collapse"] {
@@ -159,4 +181,24 @@ a.article:hover {
 
 body {
 	margin: 0;
+}
+
+.logo {
+	width: 100px;
+	height: 100px;
+	display: block;
+	margin: auto auto;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+/* ---------------------------------------------------
+    ALERT 
+----- */
+
+.alert-container {
+	background-color: #f5f5f5;
+	border: 1px #7e7e7e !important;
 }

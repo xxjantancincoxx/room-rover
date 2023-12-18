@@ -9,5 +9,5 @@ session_destroy();
 
 // Redirect to the login page or homepage
 header("Location: ../index.php"); // Change this to the appropriate URL
-exit;
+exit();
 ?>
