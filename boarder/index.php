@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php 
+<?php
 
 session_start();
 
@@ -13,9 +13,16 @@ if (!isset($_SESSION["session_id"])) {
 include('header.php')
 
 ?>
-<style>
 
+<style>
+	#content {
+		width: 100%;
+		padding: 20px;
+		min-height: 100vh;
+		transition: all 0.3s;
+	}
 </style>
+
 
 <body>
 	<div class="wrapper">
@@ -24,8 +31,8 @@ include('header.php')
 
 		<div id="content">
 
-			<?php include('navbar.php') ?>
-			
+			<?php include('./layouts/navbar.php') ?>
+
 			<?php include('dashboard_content.php') ?>
 		</div>
 	</div>
