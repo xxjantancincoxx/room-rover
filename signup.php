@@ -95,9 +95,9 @@ $_SESSION["user_type"] = $_GET["type"];
 	}
 
 	/* Firefox */
-	input[type=number] {
+	/* input[type=number] {
 		-moz-appearance: textfield;
-	}
+	} */
 
 	.password-error {
 		display: none !important;

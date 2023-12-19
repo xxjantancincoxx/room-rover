@@ -5,9 +5,9 @@ require_once('DBconn.php');
 // Get data from the login form
 
 /*     GUARDIAN      */
-$g_fullname = $_POST['g_fullname'];
-$g_address = $_POST['g_address'];
-$g_contact_no = $_POST['g_contact_no'];
+$g_fullname = $_POST['g_fullname'] ?? NULL;
+$g_address = $_POST['g_address'] ?? NULL;
+$g_contact_no = $_POST['g_contact_no'] ?? NULL;
 
 /*     BOARDER / OWNER       */
 $fullname = $_POST['fullname'];
