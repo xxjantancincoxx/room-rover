@@ -19,13 +19,13 @@ $_SESSION["user_type"] = $_GET["type"];
 
 	.box {
 		position: absolute;
-		margin-top: 2.5rem;
-		top: 50%;
-		left: 50%;
+		/* margin-top: 2.5rem; */
+		top: 20%;
+		/* left: 50%; */
 		height: auto;
-		width: 60%;
+		width: 70%;
 		padding: 0 50px;
-		transform: translate(-50%, -50%);
+		/* transform: translate(-50%, -50%); */
 		background: #FFFFFF;
 		box-sizing: border-box;
 		box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
@@ -34,7 +34,7 @@ $_SESSION["user_type"] = $_GET["type"];
 
 	.main .signup-label {
 		padding: 2rem;
-		margin-bottom: 1rem;
+		/* margin-bottom: 1rem; */
 	}
 
 	.main .signup-label h3 {
@@ -147,7 +147,7 @@ $_SESSION["user_type"] = $_GET["type"];
 
 	<div class="main">
 		<div class="box">
-			<div class="signup-label">
+			<div class="signup-label pb-0">
 				<h3>Register Account </h3>
 				<hr>
 			</div>
