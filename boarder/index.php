@@ -4,6 +4,12 @@
 <?php 
 
 session_start();
+
+if (!isset($_SESSION["session_id"])) {
+	header("Location: ../index.php");
+	exit();
+}
+
 include('header.php')
 
 ?>
@@ -14,7 +20,6 @@ include('header.php')
 <body>
 	<div class="wrapper">
 
-		<!-- < ?php include('../layouts/loader.php') ?> -->
 		<?php include('sidebar.php') ?>
 
 		<div id="content">

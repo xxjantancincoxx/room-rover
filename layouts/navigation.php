@@ -17,9 +17,9 @@
 					<a href="index.html" class="logo">Room<em>Rover</em></a>
 					<ul class="nav">
 						<li><a href="index.php" class="<?php if ($current_page == 'index.php') echo 'active' ?>" id="hover-nav">Home</a></li>
-						<li><a href="rooms.php" class="<?php if ($current_page == 'rooms.php') echo 'active' ?>" id="hover-nav">Rooms</a></li> 
+						<!-- <li><a href="rooms.php" class="< ?php if ($current_page == 'rooms.php') echo 'active' ?>" id="hover-nav">Rooms</a></li>  -->
 						<div class="user_auth">
-								<li style="display:flex; align-items:center; gap:7px"><a href="login.php" class="<?php if ($current_page == 'login.php') echo 'active' ?>" id="hover-nav">Login</a> | <a href="select_user_type.php" class="<?php if ($current_page == 'signup.php') echo 'active' ?>" id="hover-nav">Signup</a></li>
+								<li style="display:flex; align-items:center; gap:7px"><a href="login.php" class="<?php if ($current_page == 'login.php') echo 'active' ?>" id="hover-nav">Login</a> | <a href="select_user_type.php" class="<?php if ($current_page == 'signup.php' || $current_page == 'select_user_type.php') echo 'active' ?>" id="hover-nav">Signup</a></li>
 						</div>
 					</ul>
 				</nav>
