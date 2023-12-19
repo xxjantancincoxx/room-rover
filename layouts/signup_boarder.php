@@ -7,21 +7,18 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="col-md-6 mt-3">
-          <label for="validationFullname">Full name:<span class="text-danger"> *</span></label>
-          <input type="text" class="form-control" name="g_fullname" id="g_fullname" required>
+        <div class="col-md-12 mt-3">
+          <input type="text" placeholder="Full name" class="form-control" name="g_fullname" id="g_fullname" required>
         </div>
       </div>
       <div class="form-row">
-        <div class="col-md-6 mt-3">
-          <label for="validationAddress">Address:<span class="text-danger"> *</span></label>
-          <input type="text" class="form-control" name="g_address" id="g_address" required>
+        <div class="col-md-12 mt-3">
+          <input type="text" placeholder="Address" class="form-control" name="g_address" id="g_address" required>
         </div>
       </div>
       <div class="form-row">
-        <div class="col-md-6 mt-3">
-          <label for="validationGcontact">Contact Number:<span class="text-danger"> *</span></label>
-          <input type="number" class="form-control" name="g_contact_no" id="g_contact_no" required>
+        <div class="col-md-12 mt-3">
+          <input type="number" placeholder="Contact Number" class="form-control" name="g_contact_no" id="g_contact_no" required>
         </div>
       </div>
     </div>
@@ -34,55 +31,44 @@
       </div>
       <div class="form-row">
         <div class="col-md-6 mt-3">
-          <label for="validationfullname">Full name:<span class="text-danger"> *</span></label>
-          <input type="text" class="form-control" name="fullname" id="fullname" required>
+          <input type="text" placeholder="Full name" class="form-control" name="fullname" id="fullname" required>
         </div>
         <div class="col-md-6 mt-3">
-          <label for="validationage">Age:<span class="text-danger"> *</span></label>
-          <input type="number" class="form-control" name="age" id="age" value="" required>
+          <input type="number" placeholder="Age" class="form-control" name="age" id="age" value="" required>
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-6 mt-3">
-          <label for="validationGender">Gender:<span class="text-danger"> *</span></label>
           <select class="form-control" name="gender" id="gender">
             <option>Male</option>
             <option>Female</option>
           </select>
         </div>
         <div class="col-md-6 mt-3">
-          <label for="validationemail">Email:<span class="text-danger"> *</span></label>
-          <input type="email" class="form-control" name="email" id="email" required>
+          <input type="email" placeholder="Email" class="form-control" name="email" id="email" required>
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-6 mt-3">
-          <label for="validationcontactnumber">Contact Number:<span class="text-danger"> *</span></label>
-          <input type="number" class="form-control" name="contact_no" id="contact_no" required>
+          <input type="number" placeholder="Contact Number" class="form-control" name="contact_no" id="contact_no" required>
         </div>
         <div class="col-md-6 mt-3">
-          <label for="validationusername">Username:<span class="text-danger"> *</span></label>
-          <input type="text" class="form-control" name="username" id="username" required>
+          <input type="text" placeholder="Username" class="form-control" name="username" id="username" required>
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-6 mt-3">
-          <label for="validationtpassword">Password:<span class="text-danger"> *</span></label>
-          <input type="password" class="form-control password" name="password" id="password" required>
-          <span class="password-error" id="password-error">
-            <p class="text-danger">Password do not match!</p>
-          </span>
+          <input type="password" placeholder="Password" class="form-control password" name="password" id="password" required>
         </div>
         <div class="col-md-6 mt-3">
-          <label for="validationretypepassword">Re-type Password:<span class="text-danger"> *</span></label>
-          <input type="password" class="form-control retypepassword" name="retypepassword" id="retypepassword" required>
+          <input type="password" placeholder="Re-type Password" class="form-control retypepassword" name="retypepassword" id="retypepassword" required>
         </div>
       </div>
     </div>
   </div>
   <div class="row mt-5">
-    <div class="button w-100 mt-5">
-      <div class="d-flex justify-content-between mt-4">
+    <div class="button w-100">
+      <div class="d-flex justify-content-between">
         <p class="text-dark mt-2">By signing up, you agree to our <a href="#" data-toggle="modal" data-target="#termsModal">Terms and Conditions</a>.</p>
         <button type="submit" class="btn btn-secondary">Sign up</button>
       </div>
