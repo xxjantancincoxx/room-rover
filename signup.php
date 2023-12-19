@@ -1,4 +1,11 @@
-<?php include('layouts/header.php') ?>
+<?php
+session_start();
+
+include('layouts/header.php');
+
+$_SESSION["user_type"] = $_GET["type"];
+
+?>
 
 <style>
 	.main {
@@ -36,11 +43,11 @@
 	}
 
 
-	.a{
+	.a {
 		margin-top: 30px !important;
 		width: 100%;
 		position: fixed;
-    bottom: 0;
+		bottom: 0;
 	}
 
 	.signup p a {
@@ -93,11 +100,12 @@
 	}
 
 	.password-error {
-		display: none;
+		display: none !important;
 	}
 </style>
 
 <body>
+	<script type="text/javascript" src="./assets/js/validators/signup-validator.js"></script>
 
 	<?php include('layouts/navigation.php') ?>
 
@@ -144,7 +152,7 @@
 				<hr>
 			</div>
 			<div class="signup">
-				<form class="row g-3" action="backend/signup.php" method="post">
+				<form class="row g-3" action="backend/signup.php" id="form-sign-up" method="post">
 
 					<?php
 					// Retrieve the user type from the URL parameter
@@ -165,10 +173,10 @@
 
 
 					<input type="hidden" name="user_type" value="< ?php echo $userType; ?>">
-					</div>
-				</form>
 			</div>
+			</form>
 		</div>
+	</div>
 
 
 	</div>
@@ -183,7 +191,6 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="./assets/js/signup-validator.js"></script>
 	<!-- < ?php include('layouts/footer.php') ?> -->
 
 </body>

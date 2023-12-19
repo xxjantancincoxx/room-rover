@@ -9,7 +9,7 @@
       <div class="form-row">
         <div class="col-md-6 mt-3">
           <label for="validationFullname">Full name:<span class="text-danger"> *</span></label>
-          <input type="text" class="form-control" name="g_fullname" id="g_fullname"required>
+          <input type="text" class="form-control" name="g_fullname" id="g_fullname" required>
         </div>
       </div>
       <div class="form-row">
@@ -69,7 +69,9 @@
         <div class="col-md-6 mt-3">
           <label for="validationtpassword">Password:<span class="text-danger"> *</span></label>
           <input type="password" class="form-control password" name="password" id="password" required>
-          <span class="password-error text-danger">Password do not match!</span>
+          <span class="password-error" id="password-error">
+            <p class="text-danger">Password do not match!</p>
+          </span>
         </div>
         <div class="col-md-6 mt-3">
           <label for="validationretypepassword">Re-type Password:<span class="text-danger"> *</span></label>
@@ -82,7 +84,7 @@
     <div class="button w-100 mt-5">
       <div class="d-flex justify-content-between mt-4">
         <p class="text-dark mt-2">By signing up, you agree to our <a href="#" data-toggle="modal" data-target="#termsModal">Terms and Conditions</a>.</p>
-        <button type="submit" class="btn btn-secondary" onclick="return validateForm()">Sign up</button>
+        <button type="submit" class="btn btn-secondary">Sign up</button>
       </div>
     </div>
   </div>

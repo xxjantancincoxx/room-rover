@@ -16,7 +16,7 @@ $gender = $_POST['gender'];
 $contact_no = $_POST['contact_no'];
 $email = $_POST['email'];
 $username = $_POST['username'];
-$user_type = $_GET['type'];
+$user_type = $_SESSION['user_type'];
 $password = $_POST['password'];
 $hashed_pass = md5($password);
 
@@ -24,22 +24,13 @@ $hashed_pass = md5($password);
 session_regenerate_id(true);
 $session_id = session_id();
 
-// Insert into accounts table
+$query = "INSERT INTO `accounts` (session_id, username, password, user_type) VALUES ('$session_id', '$username', '$hashed_pass', '$user_type');";
+$query = $query . " INSERT INTO `users` (session_id, g_fullname, g_address, g_contact_no, fullname, age, gender, contact_no, email) VALUES ('$session_id', '$g_fullname', '$g_address', '$g_contact_no', '$fullname', '$age', '$gender', '$contact_no', '$email');";
 
-$accountsQuery = "INSERT INTO accounts (session_id, username, password, user_type) VALUES ('$session_id', '$username', '$hashed_pass', '$user_type')";
-
-if (mysqli_query($conn, $accountsQuery)) {
-  echo "<script>console.log('New record created successfully for accounts table!');</script>";
+if ($conn->multi_query($query) === TRUE) {
+  echo "Success creating user!";
 } else {
-  echo "<script>console.log('Error: " . $accountsQuery . "<br>" . $conn->error . "');</script>";
-}
-
-$usersQuery = "INSERT INTO users (session_id, g_fullname, g_address, fullname, age, gender, contact_no, email, g_contact_no) VALUES ('$session_id, '$g_fullname', '$g_address', '$fullname', '$age', '$gender', '$contact_no', '$email', '$g_contact_no')";
-
-if (mysqli_query($conn, $usersQuery)) {
-  echo "<script>console.log('New record created successfully for users table!');</script>";
-} else {
-  echo "<script>console.log('Error: " . $usersQuery . "<br>" . $conn->error . "');</script>";
+  echo "Error creating user!";
 }
 
 $conn->close();
