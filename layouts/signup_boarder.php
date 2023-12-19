@@ -1,4 +1,97 @@
-<div class="division" style="display:flex; width:100%; justify-content:center; align-items:center; gap:10px; padding:5px 0">
+<div class="container">
+  <div class="row">
+    <div class="col-md right-border">
+      <div class="d-flex justify-content-center border-bottom">
+        <div>
+          <h5>Guardian's Information</h5>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mt-3">
+          <label for="validationFullname">Full name:<span class="text-danger"> *</span></label>
+          <input type="text" class="form-control" name="g_fullname" id="g_fullname" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mt-3">
+          <label for="validationAddress">Address:<span class="text-danger"> *</span></label>
+          <input type="text" class="form-control" name="g_address" id="g_address" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mt-3">
+          <label for="validationGcontact">Contact Number:<span class="text-danger"> *</span></label>
+          <input type="number" class="form-control" name="g_contact_no" id="g_contact_no" required>
+        </div>
+      </div>
+    </div>
+    <div class="vl"></div>
+    <div class="col-md left-border">
+      <div class="d-flex justify-content-center border-bottom">
+        <div>
+          <h5>Boarder's Information</h5>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mt-3">
+          <label for="validationfullname">Full name:<span class="text-danger"> *</span></label>
+          <input type="text" class="form-control" name="fullname" id="fullname" required>
+        </div>
+        <div class="col-md-6 mt-3">
+          <label for="validationage">Age:<span class="text-danger"> *</span></label>
+          <input type="number" class="form-control" name="age" id="age" value="" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mt-3">
+          <label for="validationGender">Gender:<span class="text-danger"> *</span></label>
+          <select class="form-control" name="gender" id="gender">
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+        <div class="col-md-6 mt-3">
+          <label for="validationemail">Email:<span class="text-danger"> *</span></label>
+          <input type="email" class="form-control" name="email" id="email" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mt-3">
+          <label for="validationcontactnumber">Contact Number:<span class="text-danger"> *</span></label>
+          <input type="number" class="form-control" name="contact_no" id="contact_no" required>
+        </div>
+        <div class="col-md-6 mt-3">
+          <label for="validationusername">Username:<span class="text-danger"> *</span></label>
+          <input type="text" class="form-control" name="username" id="username" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mt-3">
+          <label for="validationtpassword">Password:<span class="text-danger"> *</span></label>
+          <input type="password" class="form-control password" name="password" id="password" required>
+          <span class="password-error" id="password-error">
+            <p class="text-danger">Password do not match!</p>
+          </span>
+        </div>
+        <div class="col-md-6 mt-3">
+          <label for="validationretypepassword">Re-type Password:<span class="text-danger"> *</span></label>
+          <input type="password" class="form-control retypepassword" name="retypepassword" id="retypepassword" required>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="button w-100 mt-5">
+      <div class="d-flex justify-content-between mt-4">
+        <p class="text-dark mt-2">By signing up, you agree to our <a href="#" data-toggle="modal" data-target="#termsModal">Terms and Conditions</a>.</p>
+        <button type="submit" class="btn btn-secondary">Sign up</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- <div class="division" style="display:flex; width:100%; justify-content:center; align-items:center; gap:10px; padding:5px 0">
   <span style="width:40%; background-color:white; height:1px"></span>
   <p style="color:black; font-weight:bold">Your Guardian</p> <span style="width:40%; background-color:white; height:1px"></span>
 </div>
@@ -61,4 +154,4 @@
 <div class="col-md-2 mt-3">
   <label for="password" class="form-label">Password</label>
   <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-</div>
+</div> -->
