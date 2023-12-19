@@ -1,31 +1,22 @@
 <?php
 
+session_start();
+
 use function PHPSTORM_META\type;
 
 include('layouts/header.php');
-if (isset($_GET['code'])) {
-	// Get Token
-	$token = $gclient->fetchAccessTokenWithAuthCode($_GET['code']);
+require_once('backend/DBconn.php');
 
-	// Check if fetching token did not return any errors
-	if (!isset($token['error'])) {
-		// Setting Access token
-		$gclient->setAccessToken($token['access_token']);
-
-		// store access token
-		//$_SESSION['access_token'] = $token['access_token'];
-
-		// Get Account Profile using Google Service
-		//$gservice = new Google_Service_Oauth2($gclient);
-
-		// Get User Data
-		// $udata = $gservice->userinfo->get();
-		// echo $udata;
+if (isset($_SESSION["username"])) {
+	if ($_SESSION["user_type"] === "boarder") {
+		header("Location: /room_rover/boarder?session=" . $_SESSION["session"]);
+		exit();
+	} else if ($_SESSION["user_type"] === "owner") {
+		header("Location: /room_rover/owner?session=" . $_SESSION["session"]);
+		exit();
 	}
 }
 
-session_start();
-require_once('backend/DBconn.php');
 
 // Set the BASE_URL
 $BASE_URL = 'http://localhost/room_rover/';
@@ -37,19 +28,6 @@ $resultset = mysqli_query($conn, $sql);
 ?>
 
 <body>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-
-	<!-- jQuery library -->
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-
-	<!-- Popper JS -->
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
-	<!-- Latest compiled JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-	<!-- ***** Navigation ****** -->
 	<?php include('layouts/navigation.php') ?>
 
 	<style>
@@ -63,108 +41,12 @@ $resultset = mysqli_query($conn, $sql);
 		}
 	</style>
 
-	<div id="demo" class="carousel slide" data-ride="carousel">
-		<ul class="carousel-indicators">
-			<li data-target="#demo" data-slide-to="0" class="active"></li>
-			<li data-target="#demo" data-slide-to="1"></li>
-			<li data-target="#demo" data-slide-to="2"></li>
-		</ul>
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img src="assets/images/carousel1.jpg" alt="Los Angeles" width="1100" height="500">
-				<div class="carousel-caption">
-					<h3>Go Big, or Go Home.</h3>
-					<h6>- ELiza Dushku -</h6>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<img src="assets/images/carousel2.jpg" alt="Chicago" width="1100" height="500">
-				<div class="carousel-caption">
-					<h3>Home isn't a place. It's a feeling.</h3>
-					<h6>- Cecilia Ahern -</h6>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<img src="assets/images/carousel3.jpg" alt="New York" width="1100" height="500">
-				<div class="carousel-caption">
-					<h3>Price is what you pay, value is what you get.</h3>
-					<h6>- Warren Buffet -</h6>
-				</div>
-			</div>
-		</div>
-		<a class="carousel-control-prev" href="#demo" data-slide="prev">
-			<span class="carousel-control-prev-icon"></span>
-		</a>
-		<a class="carousel-control-next" href="#demo" data-slide="next">
-			<span class="carousel-control-next-icon"></span>
-		</a>
-	</div>
+	<?php include('layouts/carousel.php') ?>
+
+	<?php include('layouts/homepage_card.php') ?>
 
 	<div class="col-lg-12">
-		<div class="section-heading">
-			<h2>Available Boarding Houses</h2>
-		</div>
-		<?php foreach ($resultset as $result) : ?>
-			<label><?= $result['name']; ?> </label>
-			<div class="row">
-				<div class="col-md-4" style="padding: 30px;">
-					<div class="card hovercard text-center">
-						<div class="cardheader">
-							<div class="avatar">
-								<img alt="" src="<?php echo $BASE_URL . 'backend/api/uploads/OWNER' . $result['owner_id'] . '/' . $record['pic']; ?>" class="img-fluid" style="max-height: 200px; max-width: 100%;">
-							</div>
-						</div>
-						<div class="card-body info">
-							<div class="title">
-								<a href="#" style="font-size: 18px; font-weight: bold; color: #333;"><?php echo $result['name']; ?></a>
-							</div>
-							<div class="desc loc" style="font-size: 15px; color: #666;">
-								<?php echo ($result['location']); ?>
-							</div>
-							<div class="desc price-per-room" style="font-size: 18px; color: #666; font-weight: bold;">
-								<?php echo '₱' . number_format($result['price']); ?>
-							</div>
-							<div class="desc text-left">
-								<strong>E-wallet/Contact Number:</strong> <?php echo $result['e_wallet']; ?>
-							</div>
-							<div class="desc text-left">
-								<strong>Condition:</strong> <?php echo $result['is_aircon'] ? 'Air Conditioned' : 'No Air Condition'; ?>
-							</div>
-							<div class="desc text-left">
-								<strong>Water & Electric:</strong> <?php echo $result['free_water_electric'] ? 'Free Water and Electric' : 'No Free Water and Electric'; ?>
-							</div>
-							<div class="desc text-left">
-								<strong>WiFi:</strong> <?php echo $result['free_wifi'] ? 'Free WiFi' : 'No Free WiFi'; ?>
-							</div>
-							<div class="desc text-left">
-								<strong>Own CR:</strong> <?php echo $result['own_cr'] ? 'Own CR' : 'No Own CR'; ?>
-							</div>
-							<div class="desc text-left">
-								<strong>Rooms Available:</strong> <?php echo $result['rooms_Available']; ?>
-							</div>
-							<div class="desc text-left">
-								<strong>Number of Reviews:</strong> <?php echo $result['review_count']; ?>
-							</div>
-							<div class="desc text-left">
-								<strong>Rating:</strong>
-								<!-- Use the average_rating column in the star-indicator data-rating attribute -->
-								<div class="star-indicator" data-rating="<?php echo $result['average_rating']; ?>"></div>
-								<!-- Display the average rating value -->
-								<span><?php echo number_format($result['average_rating'], 2); ?></span>
-							</div>
-
-						</div>
-
-						<div class="card-footer bottom">
-							<!-- Update Reserve Button -->
-							<a class="btn btn-primary btn-reserve btn-sm reserve-button" href="../room_rover/login.php">Reserve
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		<?php endforeach; ?>
-
+		
 		<!-- Services -->
 		<div class="services">
 			<div class="col-lg-12">
@@ -180,7 +62,7 @@ $resultset = mysqli_query($conn, $sql);
 							<div class="card-body">
 								<h4 class="card-title">Post your Rental Room</h4>
 								<p class="card-text">
-									This helps people looking for a place to rent find available options and contact the person offering the room for rent.
+								Attractive and cozy rental room available! Showcase your ideal living space online with vibrant photos, detailed amenities, and contact information. Don't miss out on the perfect tenant for your space!
 								</p>
 							</div>
 						</div>
@@ -210,7 +92,7 @@ $resultset = mysqli_query($conn, $sql);
 							<img src="assets/images/service3.jpg" class="card-img-top" alt="Service 3">
 							<div class="card-body">
 								<h5 class="card-title">Online Reservation</h5>
-								<p class="card-text">The process of booking and reserving rooms or accommodations within a boarding house through an online platform or website.</p>
+								<p class="card-text">Experience the convenience of securing your dream apartment online. Simply choose your desired move-in date, floor plan, and amenities to effortlessly reserve your future home for a seamless living experience.</p>
 							</div>
 						</div>
 					</div>

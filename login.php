@@ -1,6 +1,16 @@
 <?php 
 session_start();
 
+if (isset($_SESSION["username"])) {
+    if ($_SESSION["user_type"] === "boarder") {
+        header("Location: /room_rover/boarder?session=" . $_SESSION["session"]);
+        exit();
+    } else if ($_SESSION["user_type"] === "owner") {
+        header("Location: /room_rover/owner?session=" . $_SESSION["session"]);
+        exit();
+    }
+}
+
 include './vendor/autoload.php';
 
 if (isset($_SESSION['session'])) {
