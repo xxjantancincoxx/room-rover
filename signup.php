@@ -3,7 +3,7 @@
 <style>
 	.main {
 		background-color: #656C74;
-		height: 88vh;
+		height: 100vh;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -15,11 +15,11 @@
 		margin-top: 2.5rem;
 		top: 50%;
 		left: 50%;
-		height: 530px;
-		width: 90%;
+		height: auto;
+		width: 60%;
 		padding: 0 50px;
 		transform: translate(-50%, -50%);
-		background: #656C78;
+		background: #FFFFFF;
 		box-sizing: border-box;
 		box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
 		border-radius: 10px;
@@ -36,48 +36,11 @@
 	}
 
 
-	.button {
-		margin-top: 30px;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+	.a{
+		margin-top: 30px !important;
 		width: 100%;
-		/* border: 1px solid red; */
-	}
-
-	button {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		outline: none;
-		cursor: pointer;
-		width: 120px;
-		height: 40px;
-		background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
-		border-radius: 30px;
-		border: 1px solid #8F9092;
-		transition: all 0.2s ease;
-		font-family: "Source Sans Pro", sans-serif;
-		font-size: 14px;
-		font-weight: 600;
-		color: #606060;
-		text-shadow: 0 1px #fff;
-	}
-
-	button:hover {
-		box-shadow: 0 6px 5px 3px #656C74, 0 9px 11px #656C74, 0 -1px 7px #656C74, 0 -3px 7px #656C74, inset 0 0 6px 6px #CECFD1;
-	}
-
-	button:active {
-		box-shadow: 0 6px 5px 3px #656C74, 0 9px 11px #656C74, 0 -1px 7px #656C74, 0 -3px 7px #656C74, inset 0 0 6px 6px #999, inset 0 0 30px #aaa;
-	}
-
-	button:focus {
-		box-shadow: 0 6px 5px 3px #656C74, 0 9px 11px #656C74, 0 -1px 7px #656C74, 0 -3px 7px #656C74, inset 0 0 6px 6px #999, inset 0 0 30px #aaa;
-	}
-
-	.signup p {
-		color: #FFFFFF;
+		position: fixed;
+    bottom: 0;
 	}
 
 	.signup p a {
@@ -108,9 +71,34 @@
 		font-size: 14px;
 		font-weight: bold;
 	}
+
+	.vl {
+		border-left: 1px solid #7e7e7e;
+		height: 60%;
+		position: absolute;
+		left: 50%;
+		margin-left: -3px;
+	}
+
+	/* Chrome, Safari, Edge, Opera */
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	/* Firefox */
+	input[type=number] {
+		-moz-appearance: textfield;
+	}
+
+	.password-error {
+		display: none;
+	}
 </style>
 
 <body>
+
 	<?php include('layouts/navigation.php') ?>
 
 	<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
@@ -152,7 +140,8 @@
 	<div class="main">
 		<div class="box">
 			<div class="signup-label">
-				<h3>Signup your account</h3>
+				<h3>Register Account </h3>
+				<hr>
 			</div>
 			<div class="signup">
 				<form class="row g-3" action="backend/signup.php" method="post">
@@ -175,15 +164,8 @@
 					?>
 
 
-					<input type="hidden" name="user_type" value="<?php echo $userType; ?>">
-
-
-					<div class="button">
-
-						<p>By signing up, you agree to our <a href="#" data-toggle="modal" data-target="#termsModal">Terms and Conditions</a>.</p>
-						<button type="submit" onclick="return validateForm()">Sign up</button>
+					<input type="hidden" name="user_type" value="< ?php echo $userType; ?>">
 					</div>
-
 				</form>
 			</div>
 		</div>
@@ -201,42 +183,7 @@
 		</div>
 	</div>
 
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var userTypeQueryParam = "<?php echo $userType; ?>";
-
-			// Set the value of the user_type hidden input field based on the URL parameter
-			var userTypeHiddenInput = document.querySelector('input[name="user_type"]');
-			if (userTypeQueryParam && userTypeHiddenInput) {
-				userTypeHiddenInput.value = userTypeQueryParam;
-			}
-		});
-
-		function validateForm() {
-			// Retrieve the user type from the URL parameter
-			var userType = "<?php echo $userType; ?>";
-
-			// Validate each required field based on user type
-			if (userType === 'owner') {
-				var requiredFields = ["lastname", "middlename", "firstname", "age", "gender", "contact_no", "email", "username", "password", "user_type"];
-			} else if (userType === 'boarder') {
-				var requiredFields = ["g_lastname", "g_middlename", "g_firstname", "g_address", "lastname", "middlename", "firstname", "age", "gender", "contact_no", "email", "username", "password", "user_type"];
-			}
-
-			for (var i = 0; i < requiredFields.length; i++) {
-				var field = document.getElementById(requiredFields[i]);
-				if (field.value === "" || field.value === null) {
-					alert("Please fill in all fields.");
-					return false; // Prevent form submission
-				}
-			}
-
-			// If all fields are filled, allow form submission
-			return true;
-		}
-	</script>
-
-
-	<?php include('layouts/footer.php') ?>
+	<script type="text/javascript" src="./assets/js/signup-validator.js"></script>
+	<!-- < ?php include('layouts/footer.php') ?> -->
 
 </body>
