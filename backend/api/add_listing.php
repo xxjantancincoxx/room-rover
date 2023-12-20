@@ -30,21 +30,6 @@ if (isset($_FILES["listingpic"]) && isset($_FILES["ewallet_qr_code"])) {
 
 		$query = "INSERT into tbl_listings(name,e_wallet,qr_pic,location,rooms_Available,owner_id,price,is_aircon,free_water_electric,free_wifi,own_cr,pic,date_added) 
             VALUES ('$li_name','$li_wal','$ewalletQrCode','$li_loc','$rooms','$owner_id','$price','$aircon','$we','$wifi','$own_cr','$pic','$date');";
-		// $stmt = $pdo->prepare($query);
-		// $stmt->bindParam(':li_name', $li_name, PDO::PARAM_STR);
-		// $stmt->bindParam(':li_wal', $li_wal, PDO::PARAM_STR);
-		// $stmt->bindParam(':qr_pic', $ewalletQrCode, PDO::PARAM_STR);
-		// $stmt->bindParam(':li_loc', $li_loc, PDO::PARAM_STR);
-		// $stmt->bindParam(':owner_id', $_SESSION['id'], PDO::PARAM_INT);
-		// $stmt->bindParam(':price', $price, PDO::PARAM_INT);
-		// $stmt->bindParam(':rooms_Available', $rooms, PDO::PARAM_INT);
-		// $stmt->bindParam(':we', $we, PDO::PARAM_INT);
-		// $stmt->bindParam(':wifi', $wifi, PDO::PARAM_INT);
-		// $stmt->bindParam(':aircon', $aircon, PDO::PARAM_INT);
-		// $stmt->bindParam(':own_cr', $own_cr, PDO::PARAM_INT);
-		// $stmt->bindParam(':pic', $pic, PDO::PARAM_STR);
-		// $stmt->bindParam(':date_added', $date, PDO::PARAM_STR);
-		// $stmt->execute();
 
 		if (mysqli_query($conn, $query) === TRUE) {
 			// echo json_encode(array(
