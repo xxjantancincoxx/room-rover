@@ -46,7 +46,7 @@
   <div class="row mt-5">
     <div class="button w-100">
       <div class="d-flex justify-content-between">
-        <p class="text-dark mt-2">By signing up, you agree to our <a href="#" data-toggle="modal" data-target="#termsModal">Terms and Conditions</a>.</p>
+        <p class="text-dark mt-2">By signing up, you agree to our <a href="#" data-toggle="modal" data-target="#termsModal">Terms and Conditions</a><a href="#" data-toggle="modal" data-target="#agreementModal"><span class="font-weight-normal">&nbsp;and</span> Partnership Agreeement to the Admin</a>.</p>
         <button type="submit" class="btn btn-secondary">Sign up</button>
       </div>
     </div>

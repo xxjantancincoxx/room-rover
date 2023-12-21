@@ -145,6 +145,31 @@ $_SESSION["user_type"] = $_GET["type"];
 		</div>
 	</div>
 
+	<div class="modal fade" id="agreementModal" tabindex="-1" role="dialog" aria-labelledby="agreement" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="agreement">Agreement to the Admin</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>In this collaborative venture, the Owner and Administrator mutually agree to abide by the terms and conditions outlined herein. The Owner entrusts the Administrator with specified responsibilities, encompassing: Oversee the maintenance, cleanliness, and overall condition of the boarding house property. Interact with tenants, addressing concerns, and ensuring a positive living environment. Draft, review, and manage lease agreements, outlining terms and conditions for tenants. Handle rent collection, financial transactions, and budgeting for the boarding house. Ensure the boarding house complies with safety regulations and local housing codes. Implement and maintain security measures to safeguard both property and tenants. Coordinate utility services and address any issues related to water, electricity, heating, and other amenities. Develop and communicate emergency procedures, responding promptly to any urgent situations.Market and attract tenants through effective advertising and tenant screening processes.Screen potential tenants, conduct interviews, and select suitable individuals based on established criteria. Mediate disputes between tenants and address conflicts to maintain a harmonious living environment.
+
+
+						Conduct regular inspections of the property to identify and address maintenance needs promptly.
+
+						Maintain accurate records of lease agreements, payments, and any communication with tenants.
+
+						Foster a sense of community among tenants through organized events or activities.
+
+						Stay informed about and adhere to local, state, and federal laws related to property management and tenant rights. while maintaining ultimate authority over critical decisions. The Administrator acknowledges and accepts these responsibilities, committing to execute them diligently. Both parties commit to transparent communication, promptly addressing concerns and seeking amicable resolutions. Violation of these terms may result in termination of the agreement. This agreement establishes a framework akin to terms and conditions, fostering a cooperative and productive working relationship.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="main">
 		<div class="box">
 			<div class="signup-label pb-0">

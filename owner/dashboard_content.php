@@ -1,7 +1,7 @@
 <div class="container">
   <div class="alert alert-container" role="alert">
     <h3 class="text-secondary font-weight-bold" style="font-size:1.5rem;">Welcome Owner!</h3>
-    <div>Reviews Page</div>
+    <div>Dashboard Page</div>
   </div>
   <div class="row">
     <div class="col-md-12">
@@ -15,7 +15,7 @@
         ?>
 
         <div class="col-sm-4">
-          <div class="widget-stat card bg-danger">
+          <div class="widget-stat card bg-secondary">
             <div class="card-body  p-4">
               <div class="media">
                 <span class="mr-3">
@@ -83,8 +83,35 @@
           </div>
         </div>
       </div>
+      <div class="row">
+      <div class="col-sm-4">
+        <?php 
+          $session_owner_id = $_SESSION['session_id'];
+          $sqlCountReservations = "SELECT COUNT(*) AS reservationCount 
+                                  FROM tbl_reservations r
+                                  JOIN tbl_listings l ON r.lid = l.listing_id
+                                  WHERE l.owner_id = '$session_owner_id';";
+          $temp_result_count = mysqli_query($conn, $sqlCountReservations);
+          $result = mysqli_fetch_assoc($temp_result_count);
+        
+        ?>
+          <div class="widget-stat card bg-primary">
+            <div class="card-body p-4">
+              <div class="media">
+                <span class="mr-3">
+                  <i class="flaticon-381-star"></i>
+                </span>
+                <div class="media-body text-white text-right">
+                  <p class="text-white mb-1">Reservations</p>
+                  <h3 class="text-white"><?php echo $result["reservationCount"]; ?></h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="card" style="width: auto;">
+    <!-- <div class="card" style="width: auto;">
       <div class="card-header">
         <h4 class="card-title">My Listings</h4>
         <a href="add_listing.php" class="btn btn-success shadow btn-md ">Add Listing</a>
@@ -128,6 +155,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

@@ -133,7 +133,7 @@ include('header.php');
                         <div class="row">
 
                           <div class="col-sm-12 col-xl-12">
-                            <button id="clear" type="button" class="btn btn-danger btn-square">Clear</button>
+                            <button id="clear" type="button" class="btn btn-danger btn-square">Cancel</button>
                             <button id="save_listing" type="submit" class="btn btn-success btn-square">Save</button>
                           </div>
                         </div>
