@@ -23,9 +23,7 @@ include('header.php');
     <div id="content">
 
       <?php include('../layouts/navbar.php') ?>
-
       <?php include('dashboard_content.php') ?>
-      
     </div>
   </div>
 

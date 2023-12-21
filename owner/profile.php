@@ -39,7 +39,7 @@ $session_id = $_SESSION["session_id"];
                 // $stmtSelectUser = $pdo->prepare($sqlSelectUser);
                 // $stmtSelectUser->bindParam(':session_id', $session_id, PDO::PARAM_INT);
                 // $stmtSelectUser->execute();
-                  // print_r($result);
+                // print_r($result);
                 // Check if user exists
                 if (mysqli_num_rows($result) === 1) {
                   $user = mysqli_fetch_assoc($result);
@@ -59,7 +59,7 @@ $session_id = $_SESSION["session_id"];
                                   <!-- Personal Information -->
                                   <div class="mb-3">
                                     <label for="firstname" class="form-label">Full Name:</label>
-                                    <input type="text" class="form-control" id="firstname" name="fullname" value="<?php echo $user['firstname']; ?>">
+                                    <input type="text" class="form-control" id="firstname" name="fullname" value="<?php echo $user['fullname']; ?>">
                                   </div>
 
                                   <div class="mb-3">
