@@ -1,10 +1,10 @@
-<div class="container-fluid">
+<div class="container">
   <div class="alert alert-container" role="alert">
     <h3 class="text-secondary font-weight-bold" style="font-size:1.5rem;">Welcome Owner!</h3>
     <div>Reviews Page</div>
   </div>
   <div class="row">
-    <div class="col-xl-12 col-xxl-12">
+    <div class="col-md-12">
       <div class="row">
         <?php
         // Fetch and display the count of listings
@@ -14,7 +14,7 @@
         $resultCountListings = mysqli_fetch_assoc($resultCountListings_temp);
         ?>
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-sm-4">
           <div class="widget-stat card bg-danger">
             <div class="card-body  p-4">
               <div class="media">
@@ -40,7 +40,7 @@
         $resultNumRooms = mysqli_fetch_assoc($resultNumRooms_temp);
         ?>
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-sm-4">
           <div class="widget-stat card bg-success">
             <div class="card-body p-4">
               <div class="media">
@@ -67,7 +67,7 @@
         $resultAverageRating = mysqli_fetch_assoc($resultAverage_temp);
         ?>
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-sm-4">
           <div class="widget-stat card bg-info">
             <div class="card-body p-4">
               <div class="media">
