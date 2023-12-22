@@ -6,7 +6,6 @@ if (isset($_FILES["listingpic"]) && isset($_FILES["ewallet_qr_code"])) {
 
   $folder = __DIR__ . "/uploads/OWNER" . $_SESSION['id'] . "/";
   $total = count($_FILES['listingpic']['name']);
-  $loop_counter = 0;
   $listing_pic_array = array();
 
   for ($i = 0; $i < $total; $i++) {
@@ -24,8 +23,6 @@ if (isset($_FILES["listingpic"]) && isset($_FILES["ewallet_qr_code"])) {
       //   //Upload the file into the temp dir
       if (move_uploaded_file($tmpFilePath, $newFilePath)) {
         $listing_pic_array["name" . $i] = $_FILES['listingpic']['name'][$i];
-        //Handle other code here
-        $loop_counter++;
       }
     }
   }
