@@ -95,7 +95,7 @@ if (isset($_POST['listingId'], $_POST['newLiName'], $_POST['newLiWal'], $_POST['
   if (isset($qr_temp_name)) $sql = $sql . ", qr_pic = '$qr_temp_name'";
   $sql = $sql . " WHERE listing_id = '$listingId';";
 
-  $result = mysqli_query($conn, $sql);
+  // $result = mysqli_query($conn, $sql);
 
   if ($conn->query($sql) === TRUE) {
     header("Location: ../../owner/my_listings.php?session=" . $_SESSION["session_id"]);

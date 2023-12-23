@@ -98,7 +98,7 @@ $resultset = $conn->query($sql1);
     opacity: 0;
     position: absolute;
     margin-left: 50%;
-    margin-top: 40%;
+    margin-top: 30%;
     left: 0px;
     top: 0px;
     z-index: 1000;
@@ -192,14 +192,73 @@ $resultset = $conn->query($sql1);
                   Date Added: <?php echo $record["date_added"] ?>
                 </li>
               </ul>
-              <a href="#" class="btn btn-reserve btn-sm btn-primary">View Details</a>
-              <a class="btn btn-secondary btn-reserve btn-sm reserve-button" href="#" data-toggle="modal" data-target="#reserveModal" data-card-id="<?php echo $record['listing_id']; ?>" data-card-name="<?php echo $record['name']; ?>" data-card-loc="<?php echo $record['location']; ?>" data-card-price="<?php echo '₱' . $record['price']; ?>" data-card-condition="<?php echo $record['is_aircon'] ? 'Air Conditioned' : 'No Air Condition'; ?>" data-card-water-electric="<?php echo $record['free_water_electric'] ? 'Free Water and Electric' : 'No Free Water and Electric'; ?>" data-card-wifi="<?php echo $record['free_wifi'] ? 'Free WiFi' : 'No Free WiFi'; ?>" data-card-own-cr="<?php echo $record['own_cr'] ? 'Own CR' : 'No Own CR'; ?>" data-card-rooms-available="<?php echo $record['rooms_Available']; ?>">
+              <a data-toggle="modal" data-target="#viewDetailsModal<?php echo $record["listing_id"] ?>" class="btn btn-reserve btn-sm btn-primary">View Details</a>
+              <a class="btn btn-secondary btn-reserve btn-sm reserve-button" data-toggle="modal" data-target="#reserveModal" data-card-id="<?php echo $record['listing_id']; ?>" data-card-name="<?php echo $record['name']; ?>" data-card-loc="<?php echo $record['location']; ?>" data-card-price="<?php echo '₱' . $record['price']; ?>" data-card-condition="<?php echo $record['is_aircon'] ? 'Air Conditioned' : 'No Air Condition'; ?>" data-card-water-electric="<?php echo $record['free_water_electric'] ? 'Free Water and Electric' : 'No Free Water and Electric'; ?>" data-card-wifi="<?php echo $record['free_wifi'] ? 'Free WiFi' : 'No Free WiFi'; ?>" data-card-own-cr="<?php echo $record['own_cr'] ? 'Own CR' : 'No Own CR'; ?>" data-card-rooms-available="<?php echo $record['rooms_Available']; ?>">
                 Reserve
               </a>
               <!-- Review Button -->
               <button class="btn btn-info btn-success btn-sm review-button" data-toggle="modal" data-target="#reviewModal" data-card-id="<?php echo $record['listing_id']; ?>" data-card-name="<?php echo $record['name']; ?>">
                 Review
               </button>
+            </div>
+          </div>
+
+          <!-- View Details Modal -->
+          <div class="modal fade" id="viewDetailsModal<?php echo $record["listing_id"] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">View Room Details</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col col-md-6">
+                      <ul style="list-style-type:disc">
+                        <li>
+                          Name: <?php echo $record["name"] ?>
+                        </li>
+                        <li>
+                          Location: <?php echo $record["location"] ?>
+                        </li>
+                        <li>
+                          Price: <?php echo $record["price"] ?>
+                        </li>
+                        <li>
+                          Rooms Available: <?php echo $record["rooms_Available"] ?>
+                        </li>
+                        <li>
+                          Date Added: <?php echo $record["date_added"] ?>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col col-md-6">
+                      <ul style="list-style-type:disc">
+                        <li>
+                          Aircon: <?php echo $record["is_aircon"] ?>
+                        </li>
+                        <li>
+                          Free Water and Electric: <?php echo $record["free_water_electric"] ?>
+                        </li>
+                        <li>
+                          Free Wifi: <?php echo $record["free_wifi"] ?>
+                        </li>
+                        <li>
+                          Own Cr: <?php echo $record["own_cr"] ?>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <ul style="list-style-type:disc">
+                  </ul>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
             </div>
           </div>
           <br>
@@ -327,14 +386,14 @@ $resultset = $conn->query($sql1);
           <!-- Card Details Section -->
 
           <!-- Payment Details Section -->
-          <h2 class="modal-title" id="reserveModalLabel">Payment Details</h2>
+          <h4 class="modal-title" id="reserveModalLabel">Payment Details</h4>
 
 
           <div class="form-group">
             <label for="eWallet">eWallet:</label>
             <select class="form-control" id="eWallet" name="eWallet" required>
+              <option value="Cash">Cash</option>
               <option value="GCash">GCash</option>
-              <option value="PayPal">PayPal</option>
             </select>
           </div>
 
@@ -343,14 +402,14 @@ $resultset = $conn->query($sql1);
             <input type="text" class="form-control" id="accountName" name="accountName" placeholder="John Doe" required>
           </div>
 
-          <div class="form-group">
+          <div class="form-group acc_num">
             <label for="accountNumber">Account Number:</label>
-            <input type="text" class="form-control" id="accountNumber" name="accountNumber" placeholder="1234567890" required>
+            <input type="text" class="form-control" id="accountNumber" name="accountNumber" placeholder="0914567890" required>
           </div>
 
-          <div class="form-group">
+          <div class="form-group ref_num">
             <label for="referenceNumber">Reference Number:</label>
-            <input type="text" class="form-control" id="referenceNumber" name="referenceNumber" placeholder="Reference123" required>
+            <input type="text" class="form-control" id="referenceNumber" name="referenceNumber" placeholder="7016..." required>
           </div>
 
           <div class="form-group">
@@ -383,45 +442,62 @@ $resultset = $conn->query($sql1);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
   <script>
-    $('#holder-card img').each(function(index) {
-      if ($(this).attr('onclick') != null) {
-        if ($(this).attr('onclick').indexOf("runThis()") == -1) {
+    $(document).ready(function() {
+      $(".acc_num").hide();
+      $(".ref_num").hide();
+
+      $("#eWallet").change(function() {
+
+        if ($(this).val() == "Gcash") {
+          $(".acc_num").show();
+          $(".ref_num").show();
+          // $(".no").hide();
+        }
+        if ($(this).val() == "Cash") {
+          $(".acc_num").hide();
+          $(".ref_num").hide();
+        }
+
+      });
+
+      $('#holder-card img').each(function(index) {
+        if ($(this).attr('onclick') != null) {
+          if ($(this).attr('onclick').indexOf("runThis()") == -1) {
+            $(this).click(function() {
+              $(this).attr('onclick');
+              var src = $(this).attr("src");
+              ShowLargeImage(src);
+            });
+          }
+        } else {
           $(this).click(function() {
-            $(this).attr('onclick');
             var src = $(this).attr("src");
             ShowLargeImage(src);
           });
         }
-      } else {
-        $(this).click(function() {
-          var src = $(this).attr("src");
-          ShowLargeImage(src);
-        });
+      });
+
+      $('body').on('click', '.modal-overlay', function() {
+        $('.modal-overlay, .modal-img').remove();
+        $('body').removeClass('noscroll');
+      });
+
+      function ShowLargeImage(imagePath) {
+        $('body').append('<div class="modal-overlay"></div><div class="modal-img"><img src="' + imagePath.replace("small", "large") + '" /></div>').addClass('noscroll');
+        $('.modal-img').animate({
+          opacity: 1
+        }, 1000);
+      }
+
+      // JavaScript function to show QR code modal
+      function showQrCodeModal(qrCodeImageUrl) {
+        // Update QR code image source
+        $('#qrCodeImage').attr('src', qrCodeImageUrl);
+
+        // Show QR code modal
+        $('#qrCodeModal').modal('show');
       }
     });
-
-    $('body').on('click', '.modal-overlay', function() {
-      $('.modal-overlay, .modal-img').remove();
-      $('body').removeClass('noscroll');
-    });
-
-    function ShowLargeImage(imagePath) {
-      $('body').append('<div class="modal-overlay"></div><div class="modal-img"><img src="' + imagePath.replace("small", "large") + '" /></div>').addClass('noscroll');
-      $('.modal-img').animate({
-        opacity: 1
-      }, 1000);
-    }
-
-
-
-    // JavaScript function to show QR code modal
-    function showQrCodeModal(qrCodeImageUrl) {
-      // Update QR code image source
-      $('#qrCodeImage').attr('src', qrCodeImageUrl);
-
-      // Show QR code modal
-      $('#qrCodeModal').modal('show');
-    }
   </script>
   <script>
     // Update total amount when the number of rooms changes
@@ -462,47 +538,49 @@ $resultset = $conn->query($sql1);
     }
   </script>
   <script>
-    // Update modal content when Reserve button is clicked
-    $('.reserve-button').click(function() {
-      var cardName = $(this).data('card-name');
-      var cardLoc = $(this).data('card-loc');
-      var cardPrice = $(this).data('card-price');
-      var cardCondition = $(this).data('card-condition');
-      var cardWaterElectric = $(this).data('card-water-electric');
-      var cardWifi = $(this).data('card-wifi');
-      var cardOwnCr = $(this).data('card-own-cr');
+    $(document).ready(function() {
+      // Update modal content when Reserve button is clicked
+      $('.reserve-button').click(function() {
+        var cardName = $(this).data('card-name');
+        var cardLoc = $(this).data('card-loc');
+        var cardPrice = $(this).data('card-price');
+        var cardCondition = $(this).data('card-condition');
+        var cardWaterElectric = $(this).data('card-water-electric');
+        var cardWifi = $(this).data('card-wifi');
+        var cardOwnCr = $(this).data('card-own-cr');
 
 
 
-      $('.card-name').text(cardName);
-      $('.card-loc').text(cardLoc);
-      $('.card-price').text(cardPrice);
-      $('.card-condition').text(cardCondition);
-      $('.card-water-electric').text(cardWaterElectric);
-      $('.card-wifi').text(cardWifi);
-      $('.card-own-cr').text(cardOwnCr);
+        $('.card-name').text(cardName);
+        $('.card-loc').text(cardLoc);
+        $('.card-price').text(cardPrice);
+        $('.card-condition').text(cardCondition);
+        $('.card-water-electric').text(cardWaterElectric);
+        $('.card-wifi').text(cardWifi);
+        $('.card-own-cr').text(cardOwnCr);
 
-      // Store the card details in a hidden input field (optional)
-      $('#reserveModalCardDetails').val(JSON.stringify({
-        name: cardName,
-        location: cardLoc,
-        price: cardPrice,
-        condition: cardCondition,
-        waterElectric: cardWaterElectric,
-        wifi: cardWifi,
-        ownCr: cardOwnCr
-      }));
-    });
+        // Store the card details in a hidden input field (optional)
+        $('#reserveModalCardDetails').val(JSON.stringify({
+          name: cardName,
+          location: cardLoc,
+          price: cardPrice,
+          condition: cardCondition,
+          waterElectric: cardWaterElectric,
+          wifi: cardWifi,
+          ownCr: cardOwnCr
+        }));
+      });
 
-    // Handle the reservation action
-    $('#confirmReserve').click(function() {
-      // Retrieve the card details from the hidden input field (optional)
-      var cardDetails = $('#reserveModalCardDetails').val();
-      // You can now send the cardDetails to the server using AJAX
-      // Perform your reservation logic here
-      // Example: sendAjaxRequest(cardDetails);
-      // Close the modal after the reservation is completed
-      $('#reserveModal').modal('hide');
+      // Handle the reservation action
+      $('#confirmReserve').click(function() {
+        // Retrieve the card details from the hidden input field (optional)
+        var cardDetails = $('#reserveModalCardDetails').val();
+        // You can now send the cardDetails to the server using AJAX
+        // Perform your reservation logic here
+        // Example: sendAjaxRequest(cardDetails);
+        // Close the modal after the reservation is completed
+        $('#reserveModal').modal('hide');
+      });
     });
   </script>
 
@@ -512,105 +590,108 @@ $resultset = $conn->query($sql1);
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
-    // Update modal content when Reserve button is clicked
-    $('.reserve-button').click(function() {
-      var cardId = $(this).data('card-id');
-      var roomsAvailable = parseInt($(this).data('card-rooms-available')); // Assuming you have a data attribute for rooms available
-      $('#listingId').val(cardId);
-      $('#roomsAvailable').val(roomsAvailable); // Store rooms available in a hidden field
+    $(document).ready(function() {
+      // Update modal content when Reserve button is clicked
+      $('.reserve-button').click(function() {
+        var cardId = $(this).data('card-id');
+        var roomsAvailable = parseInt($(this).data('card-rooms-available')); // Assuming you have a data attribute for rooms available
+        $('#listingId').val(cardId);
+        $('#roomsAvailable').val(roomsAvailable); // Store rooms available in a hidden field
 
-    });
+      });
 
-    // Handle the reservation action
-    $('#reserveForm').submit(function(e) {
-      e.preventDefault();
+      // Handle the reservation action
+      $('#reserveForm').submit(function(e) {
+        e.preventDefault();
 
-      // Validate form fields before submission
-      if (validateForm()) {
+        // Validate form fields before submission
+        if (validateForm()) {
 
-        // Get the number of rooms inputted in the modal
-        var numberOfRooms = parseInt($('#numberOfRooms').val());
+          // Get the number of rooms inputted in the modal
+          var numberOfRooms = parseInt($('#numberOfRooms').val());
 
-        // Get the maximum number of rooms available for the selected listing
-        var roomsAvailable = parseInt($('#roomsAvailable').val());
+          // Get the maximum number of rooms available for the selected listing
+          var roomsAvailable = parseInt($('#roomsAvailable').val());
 
-        if (numberOfRooms <= roomsAvailable && numberOfRooms > 0) {
-          // Proceed with the reservation logic
-          var listingId = $('#listingId').val();
-          var eWallet = $('#eWallet').val();
-          var accountName = $('#accountName').val();
-          var accountNumber = $('#accountNumber').val();
-          var referenceNumber = $('#referenceNumber').val();
-          var amountPaid = $('#amountPaid').val();
-          var numberOfRooms = $('#numberOfRooms').val(); // Add this line to get the number of rooms
+          if (numberOfRooms <= roomsAvailable && numberOfRooms > 0) {
+            // Proceed with the reservation logic
+            var listingId = $('#listingId').val();
+            var eWallet = $('#eWallet').val();
+            var accountName = $('#accountName').val();
+            var accountNumber = $('#accountNumber').val();
+            var referenceNumber = $('#referenceNumber').val();
+            var amountPaid = $('#amountPaid').val();
+            var numberOfRooms = $('#numberOfRooms').val(); // Add this line to get the number of rooms
 
-          // Send an AJAX request to the reserve.php file
-          $.ajax({
-            type: 'POST',
-            url: '../backend/api/reserve.php',
-            data: {
-              listingId: listingId,
-              userId: <?php echo $userId; ?>,
-              eWallet: eWallet, // Add these lines
-              accountName: accountName,
-              accountNumber: accountNumber,
-              referenceNumber: referenceNumber,
-              amountPaid: amountPaid,
-              numberOfRooms: numberOfRooms // Include the number of rooms in the data
+            // Send an AJAX request to the reserve.php file
+            $.ajax({
+              type: 'POST',
+              url: '../backend/api/reserve.php',
+              data: {
+                listingId: listingId,
+                userId: <?php echo $userId; ?>,
+                eWallet: eWallet, // Add these lines
+                accountName: accountName,
+                accountNumber: accountNumber,
+                referenceNumber: referenceNumber,
+                amountPaid: amountPaid,
+                numberOfRooms: numberOfRooms // Include the number of rooms in the data
 
-            },
-            dataType: 'json',
-            success: function(response) {
-              if (response.success) {
-                // Success: Show SweetAlert success message
-                Swal.fire({
-                  icon: 'success',
-                  title: 'Success!',
-                  text: 'Reservation successfully added.',
-                });
+              },
+              dataType: 'json',
+              success: function(response) {
+                if (response.success) {
+                  // Close the modal after the reservation is completed
+                  $('#reserveModal').modal('hide');
 
-                // Close the modal after the reservation is completed
-                $('#reserveModal').modal('hide');
+                  // Success: Show SweetAlert success message
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Reservation successfully added.',
+                  });
 
-                // Reload the page after a short delay
-                setTimeout(function() {
-                  location.reload();
-                }, 2000);
-              } else {
-                // Error: Show SweetAlert error message
+                  window.location.reload();
+                  // Reload the page after a short delay
+                  // setTimeout(function() {
+                  //   location.reload();
+                  // }, 2000);
+                } else {
+                  // Error: Show SweetAlert error message
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: response.message, // Display the error message from the server
+                  });
+                }
+              },
+              error: function() {
+                // Show SweetAlert error message for general errors
                 Swal.fire({
                   icon: 'error',
                   title: 'Error!',
-                  text: response.message, // Display the error message from the server
+                  text: 'Error occurred during reservation.',
                 });
               }
-            },
-            error: function() {
-              // Show SweetAlert error message for general errors
-              Swal.fire({
-                icon: 'error',
-                title: 'Error!',
-                text: 'Error occurred during reservation.',
-              });
-            }
-          });
-        } else {
-          // Show an alert or error message for invalid number of rooms
-          Swal.fire({
-            icon: 'error',
-            title: 'Validation Error!',
-            text: 'Invalid number of rooms. Please select a valid number within the available range.',
-          });
+            });
+          } else {
+            // Show an alert or error message for invalid number of rooms
+            Swal.fire({
+              icon: 'error',
+              title: 'Validation Error!',
+              text: 'Invalid number of rooms. Please select a valid number within the available range.',
+            });
+          }
         }
-      }
+      });
     });
 
     // Validate form function
     function validateForm() {
       var eWallet = $('#eWallet').val();
       var accountName = $('#accountName').val();
-      var accountNumber = $('#accountNumber').val();
-      var referenceNumber = $('#referenceNumber').val();
+      var accountNumber = $('#accountNumber').val() ? $('#accountNumber').val() : "N/A";
+      var referenceNumber = $('#referenceNumber').val() ? $('#referenceNumber').val() : "N/A";
       var amountPaid = $('#amountPaid').val();
 
       // Simple validation (you can enhance this based on your requirements)
@@ -623,6 +704,12 @@ $resultset = $conn->query($sql1);
         });
         return false;
       }
+
+      console.log("ewallet ", eWallet);
+      console.log("account_name ", accountName);
+      console.log("account_number ", accountNumber);
+      console.log("reference_number ", referenceNumber);
+      console.log("amount_paid ", amountPaid);
 
       return true;
     }
@@ -678,6 +765,11 @@ $resultset = $conn->query($sql1);
               dataType: 'json',
               success: function(response) {
                 if (response.success) {
+
+                  // Close the modal after the review is submitted
+                  $('#reviewModal').modal('hide');
+
+
                   // Success: Show SweetAlert success message
                   Swal.fire({
                     icon: 'success',
@@ -685,8 +777,7 @@ $resultset = $conn->query($sql1);
                     text: 'Your review has been successfully submitted.',
                   });
 
-                  // Close the modal after the review is submitted
-                  $('#reviewModal').modal('hide');
+
 
                   // Optionally, you can reload the page or update the reviews dynamically
                   // Example: location.reload();

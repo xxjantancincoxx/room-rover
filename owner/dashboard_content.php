@@ -86,7 +86,7 @@
       <div class="row">
       <div class="col-sm-4">
         <?php 
-          $session_owner_id = $_SESSION['session_id'];
+          $session_owner_id = $_SESSION['id'];
           $sqlCountReservations = "SELECT COUNT(*) AS reservationCount 
                                   FROM tbl_reservations r
                                   JOIN tbl_listings l ON r.lid = l.listing_id
