@@ -87,11 +87,12 @@ if (isset($_POST['listingId'], $_POST['newLiName'], $_POST['newLiWal'], $_POST['
     $qr_temp_name = $ewalletQrCode["tmp_name"];
     move_uploaded_file($qr_temp_name, $ewalletTarget);
   }
+
   // File was not uploaded, update only other fields
   // $stmt = $pdo->prepare("UPDATE tbl_listings SET name = :newLiName, e_wallet = :newLiWal, location = :newLiLoc, price = :newPrice, rooms_Available = :newRooms, free_water_electric = :newWe, is_aircon = :newAircon, free_wifi = :newWifi, own_cr = :newOwnCr WHERE listing_id = :listingId");
   $sql = "UPDATE tbl_listings SET name = '$newLiName', e_wallet = '$newLiWal', location = '$newLiLoc', price = '$newPrice', rooms_Available = '$newRooms', free_water_electric = '$newWe', is_aircon = '$newAircon', free_wifi = '$newWifi', own_cr = '$newOwnCr' ";
-  if (isset($_FILES['editListingPic'])) $sql = $sql . ", pic = '$pics_json' ";
-  if (isset($_FILES['ewallet_qr_code'])) $sql = $sql . ", qr_pic = '$qr_temp_name'";
+  if (isset($pics_json)) $sql = $sql . ", pic = '$pics_json' ";
+  if (isset($qr_temp_name)) $sql = $sql . ", qr_pic = '$qr_temp_name'";
   $sql = $sql . " WHERE listing_id = '$listingId';";
 
   $result = mysqli_query($conn, $sql);

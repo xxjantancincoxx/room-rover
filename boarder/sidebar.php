@@ -1,4 +1,4 @@
-<nav id="sidebar">
+<nav id="sidebar" class="border border-right">
 	<div class="sidebar-header" >
 		<img class="logo" src="../assets/images/logorr.png" alt="">
 		<span>Boarder</span>
