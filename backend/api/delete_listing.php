@@ -11,33 +11,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             // Your SQL query to delete the listing
-            $deleteSql = "DELETE FROM tbl_listings WHERE listing_id = :listingId";
-            $deleteStmt = $pdo->prepare($deleteSql);
-            $deleteStmt->bindParam(':listingId', $listingId, PDO::PARAM_INT);
-            $deleteStmt->execute();
+            $deleteSql = "DELETE FROM tbl_listings WHERE listing_id = '$listingId';";
 
             // Check if the delete was successful
-            if ($deleteStmt->rowCount() > 0) {
+            if ($conn->query($deleteSql) === TRUE) {
                 // If successful, send a JSON response indicating success
-                http_response_code(200); // OK
-                echo json_encode(['success' => true]);
+                // http_response_code(200); // OK
+                // echo json_encode(['success' => true]);
+                header("Location: ../../owner/index.php?session=" . $_SESSION["session"]);
+                exit();
             } else {
                 // If no rows were affected, send a JSON response indicating failure
                 http_response_code(400); // Bad Request
                 echo json_encode(['success' => false, 'error' => 'No rows were affected']);
             }
-        } catch (PDOException $e) {
+        } catch (mysqli_sql_exception $e) {
             // If an exception occurs, log the error and send a JSON response indicating failure
-            error_log("PDOException: " . $e->getMessage());
-        
-            // Output the detailed error message in the JSON response during development
-            if (defined('DEVELOPMENT_MODE') && DEVELOPMENT_MODE) {
-                http_response_code(500); // Internal Server Error
-                echo json_encode(['success' => false, 'error' => 'Internal Server Error: ' . $e->getMessage()]);
-            } else {
-                http_response_code(500); // Internal Server Error
-                echo json_encode(['success' => false, 'error' => 'Internal Server Error']);
-            }
+            error_log("MYSQLI Exception: " . $e->getMessage());
         }
         
     } else {

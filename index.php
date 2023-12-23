@@ -14,6 +14,9 @@ if (isset($_SESSION["username"])) {
 	} else if ($_SESSION["user_type"] === "owner") {
 		header("Location: /room_rover/owner?session=" . $_SESSION["session"]);
 		exit();
+	} else {
+		header("Location: /room_rover/admin?session=" . $_SESSION["session"]);
+		exit();
 	}
 }
 
