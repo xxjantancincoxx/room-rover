@@ -58,6 +58,7 @@ $result = mysqli_fetch_assoc($temp_result);
 									<div class="card-body">
 										<div class="basic-form">
 											<form enctype="multipart/form-data" action="../backend/api/edit_listing.php" method="POST">
+												<input name="listingId" value="<?php echo $id; ?>" style="display:none !important;">
 												<div class="row">
 													<div class="col-xl-12">
 														<div class="form-group row">

@@ -30,7 +30,6 @@ if (isset($_POST['listingId'], $_POST['newLiName'], $_POST['newLiWal'], $_POST['
   $ewalletQrCode = null;
   $qr_temp_name = null;
 
-  var_dump($newOwnCr);
 
   // $stmt = null;
 
@@ -82,7 +81,6 @@ if (isset($_POST['listingId'], $_POST['newLiName'], $_POST['newLiWal'], $_POST['
     // }
   }
 
-
   if (isset($_FILES["ewallet_qr_code"])) {
     $ewalletQrCode = $_FILES["ewallet_qr_code"];
     $ewalletTarget = $folder . $ewalletQrCode["name"]; // Add this line to define $ewalletTarget
@@ -99,7 +97,7 @@ if (isset($_POST['listingId'], $_POST['newLiName'], $_POST['newLiWal'], $_POST['
   $result = mysqli_query($conn, $sql);
 
   if ($conn->query($sql) === TRUE) {
-    header("Location: ../../owner/index.php?session=" . $_SESSION["session_id"]);
+    header("Location: ../../owner/my_listings.php?session=" . $_SESSION["session_id"]);
     exit();
   } else {
     echo "Failed!";
@@ -140,8 +138,10 @@ if (isset($_POST['listingId'], $_POST['newLiName'], $_POST['newLiWal'], $_POST['
 
   // // Close the database connection
   // $pdo = null;
-} else {
-  // Return an error if the necessary POST data is not provided
-  header('Content-Type: application/json');
-  echo json_encode(['success' => false, 'error' => 'Invalid POST data']);
 }
+
+// else {
+//   // Return an error if the necessary POST data is not provided
+//   header('Content-Type: application/json');
+//   echo json_encode(['success' => false, 'error' => 'Invalid POST data']);
+// }
