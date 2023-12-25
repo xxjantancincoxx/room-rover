@@ -24,7 +24,7 @@ $hashed_pass = md5($password);
 session_regenerate_id(true);
 $session_id = session_id();
 
-$query = "INSERT INTO `accounts` (session_id, username, password, user_type) VALUES ('$session_id', '$username', '$hashed_pass', '$user_type');";
+$query = "INSERT INTO `accounts` (session_id, username, password, user_type, status) VALUES ('$session_id', '$username', '$hashed_pass', '$user_type', 'pending');";
 $query = $query . " INSERT INTO `users` (session_id, g_fullname, g_address, g_contact_no, fullname, age, gender, contact_no, email) VALUES ('$session_id', '$g_fullname', '$g_address', '$g_contact_no', '$fullname', '$age', '$gender', '$contact_no', '$email');";
 
 if ($conn->multi_query($query) === TRUE) {

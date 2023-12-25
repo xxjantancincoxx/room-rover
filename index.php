@@ -27,7 +27,6 @@ $BASE_URL = 'http://localhost/room_rover/';
 $sql = "SELECT l.*, COUNT(r.review_id) AS review_count, IFNULL(AVG(r.rating), 0) AS average_rating FROM tbl_listings l LEFT JOIN reviews r ON l.listing_id = r.listing_id GROUP BY l.listing_id LIMIT 3";
 
 $resultset = mysqli_query($conn, $sql);
-
 ?>
 
 <body>

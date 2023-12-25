@@ -26,7 +26,7 @@ $username = validate($_POST['username']);
 $pass = validate($_POST['password']);
 $hashed_pass = md5($pass);
 
-$sql = "SELECT * FROM accounts WHERE username ='$username' AND password='$hashed_pass'";
+$sql = "SELECT * FROM accounts WHERE username ='$username' AND password = '$hashed_pass'";
 
 $result = mysqli_query($conn, $sql);
 
@@ -56,6 +56,10 @@ if (mysqli_num_rows($result) === 1) {
 			exit();
 		} else if ($row['user_type'] === "boarder") {
 			$url = 'Location: ../boarder?session=' . $jwt;
+			header($url);
+			exit();
+		} else if ($row['user_type'] === "admin") {
+			$url = 'Location: ../admin?session=' . $jwt;
 			header($url);
 			exit();
 		}

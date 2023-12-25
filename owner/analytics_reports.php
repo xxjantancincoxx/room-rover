@@ -45,7 +45,7 @@ include('header.php') ?>
 
     <div id="content">
 
-      <?php include('../layouts/navbar.php') ?>
+      <?php include('navbar.php') ?>
 
       <!-- row -->
       <div class="container-fluid">
@@ -141,8 +141,6 @@ include('header.php') ?>
   </div>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
-
-  <?php include('footer_links.php') ?>
   <script>
     $(document).ready(function() {
       $('#incomeTable').DataTable({

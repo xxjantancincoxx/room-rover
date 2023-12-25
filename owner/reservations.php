@@ -13,7 +13,7 @@ require_once('../backend/DBconn.php');
 // Set the BASE_URL
 $BASE_URL = 'http://localhost/room_rover/';
 
-$session_owner_id = $_SESSION['session_id'];
+$session_owner_id = $_SESSION['id'];
 $sqlCountReservations = "SELECT COUNT(*) AS reservationCount 
 												FROM tbl_reservations r
 												JOIN tbl_listings l ON r.lid = l.listing_id
@@ -139,9 +139,9 @@ $temp_result_reserve = mysqli_query($conn, $sql);
                               echo "<td>";
                               echo "<div class='btn-group'>";
                               // Change the button labels and data attributes
-                              echo "<button class='btn btn-success btn-approve' data-rs-id='{$row['rs_id']}'><i class='fas fa-check'></i> Approve</button>";
+                              echo "<button class='btn btn-sm btn-success btn-approve' data-rs-id='{$row['rs_id']}'><i class='fas fa-check'></i>Approve</button>";
 
-                              echo "<button class='btn btn-danger btn-reject' data-rs-id='{$row['rs_id']}'><i class='fas fa-times'></i> Reject</button>";
+                              echo "<button class='btn btn-sm btn-danger btn-reject' data-rs-id='{$row['rs_id']}'><i class='fas fa-times'></i>Reject</button>";
                               echo "</div>";
                               echo "</td>";
                               echo "</tr>";

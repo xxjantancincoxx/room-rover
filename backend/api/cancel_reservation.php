@@ -11,38 +11,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             // Fetch the listing ID and number of rooms for the reservation
-            $reservationDetailsSql = "SELECT lid, num_Rooms FROM tbl_reservations WHERE rs_id = :rsId";
-            $reservationDetailsStmt = $pdo->prepare($reservationDetailsSql);
-            $reservationDetailsStmt->bindParam(':rsId', $rsId, PDO::PARAM_INT);
-            $reservationDetailsStmt->execute();
-            $reservationDetails = $reservationDetailsStmt->fetch(PDO::FETCH_ASSOC);
+            $reservationDetailsSql = "SELECT lid, num_Rooms FROM tbl_reservations WHERE rs_id = '$rsId'";
+            // $reservationDetailsStmt = $pdo->prepare($reservationDetailsSql);
+            // $reservationDetailsStmt->bindParam(':rsId', $rsId, PDO::PARAM_INT);
+            // $reservationDetailsStmt->execute();
+            // $reservationDetails = $reservationDetailsStmt->fetch(PDO::FETCH_ASSOC);
+            $temp_result = mysqli_query($conn, $reservationDetailsSql);
 
-            if ($reservationDetails) {
-                $listingId = $reservationDetails['lid'];
-                $numberOfRooms = $reservationDetails['num_Rooms'];
+            if ($result = mysqli_fetch_assoc($temp_result)) {
+                $listingId = $result['lid'];
+                $numberOfRooms = $result['num_Rooms'];
 
                 // Update the number of available rooms in tbl_listings
-                $updateRoomsSql = "UPDATE tbl_listings SET rooms_Available = rooms_Available + :numberOfRooms WHERE listing_id = :listingId";
-                $updateRoomsStmt = $pdo->prepare($updateRoomsSql);
-                $updateRoomsStmt->bindParam(':numberOfRooms', $numberOfRooms, PDO::PARAM_INT);
-                $updateRoomsStmt->bindParam(':listingId', $listingId, PDO::PARAM_INT);
-                $updateRoomsStmt->execute();
+                $updateRoomsSql = "UPDATE tbl_listings SET rooms_Available = rooms_Available + '$numberOfRooms' WHERE listing_id = '$listingId'";
+                mysqli_query($conn, $updateRoomsSql);
             }
 
             // Delete related records in the payment table first
-            $deletePaymentSql = "DELETE FROM payment WHERE rs_id = :rsId";
-            $deletePaymentStmt = $pdo->prepare($deletePaymentSql);
-            $deletePaymentStmt->bindParam(':rsId', $rsId, PDO::PARAM_INT);
-            $deletePaymentStmt->execute();
+            $deletePaymentSql = "DELETE FROM payment WHERE rs_id = '$rsId'";
+            // $deletePaymentStmt = $pdo->prepare($deletePaymentSql);
+            // $deletePaymentStmt->bindParam(':rsId', $rsId, PDO::PARAM_INT);
+            // $deletePaymentStmt->execute();
+            mysqli_query($conn, $deletePaymentSql);
 
             // Your SQL query to delete the reservation
-            $deleteSql = "DELETE FROM tbl_reservations WHERE rs_id = :rsId";
-            $deleteStmt = $pdo->prepare($deleteSql);
-            $deleteStmt->bindParam(':rsId', $rsId, PDO::PARAM_INT);
-            $deleteStmt->execute();
+            $deleteSql = "DELETE FROM tbl_reservations WHERE rs_id = '$rsId'";
+            // $deleteStmt = $pdo->prepare($deleteSql);
+            // $deleteStmt->bindParam(':rsId', $rsId, PDO::PARAM_INT);
+            // $deleteStmt->execute();
+            // mysqli_query($conn, $deleteSql);
 
             // Check if the delete was successful
-            if ($deleteStmt->rowCount() > 0) {
+            if ($conn->query($deleteSql) === TRUE) {
                 // If successful, send a JSON response indicating success
                 http_response_code(200); // OK
                 echo json_encode(['success' => true]);
@@ -51,9 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 http_response_code(400); // Bad Request
                 echo json_encode(['success' => false, 'error' => 'No rows were affected']);
             }
-        } catch (PDOException $e) {
+        } catch (mysqli_sql_exception $e) {
             // Log the error to the PHP error log for debugging
-            error_log("PDOException: " . $e->getMessage());
+            error_log("mysqli_sql_exception: " . $e->getMessage());
 
             // Echo the error for client-side debugging (remove in production)
             echo json_encode(['success' => false, 'error' => $e->getMessage()]);
