@@ -8,8 +8,10 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
+$id = $_POST["id"];
+
 if ($_POST["status"] === "deactivate") {
-  $query = "UPDATE `accounts` SET status = 'inactive';";
+  $query = "UPDATE `accounts` SET status = 'inactive' WHERE session_id = '$id';";
 
   if ($conn->query($query) === TRUE) {
     echo "Success updating user!";
@@ -17,7 +19,7 @@ if ($_POST["status"] === "deactivate") {
     echo "Error updating user!";
   }
 } else if ($_POST["status"] === "activate") {
-  $query = "UPDATE `accounts` SET status = 'active';";
+  $query = "UPDATE `accounts` SET status = 'active' WHERE session_id = '$id';";
 
   if ($conn->query($query) === TRUE) {
     echo "Success updating user!";
@@ -25,7 +27,7 @@ if ($_POST["status"] === "deactivate") {
     echo "Error updating user!";
   }
 } else if ($_POST["status"] === "approve") {
-  $query = "UPDATE `accounts` SET status = 'active';";
+  $query = "UPDATE `accounts` SET status = 'active' WHERE session_id = '$id';";
 
   if ($conn->query($query) === TRUE) {
     echo "Success updating user!";
@@ -38,4 +40,3 @@ $conn->close();
 
 header('Location: ../../admin/user_management.php');
 exit();
-?>

@@ -29,7 +29,7 @@ $runQueryActive = mysqli_query($conn, $sqlQueryActive);
                       echo '<tr>';
                       echo '<td>' . $row['fullname'] . '</td>';
                       echo '<td>' . $row['email'] . '</td>';
-                      echo '<td>' . '<button class="btn btn-sm btn-danger deactivate">Deactivate</button>' . '</td>';
+                      echo '<td>' . '<input class="' . $row["fullname"] . $row["id"] . '" ' . 'type="text" value="' . $row["session_id"] . '" style="display:none;" />' . '<button class="btn btn-sm btn-secondary deactivate">Deactivate</button>' . '</td>';
                       echo '</tr>';
                     }
                   }
