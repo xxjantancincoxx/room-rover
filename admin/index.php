@@ -46,7 +46,7 @@ include('header.php')
 
 							?>
 							<div class="col-sm-6">
-								<div class="widget-stat card bg-info">
+								<div class="widget-stat card bg-secondary">
 									<div class="card-body p-4">
 										<div class="media">
 											<span class="mr-3 m-auto">
