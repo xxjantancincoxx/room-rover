@@ -149,6 +149,7 @@ $result_collector = array();
                                           <!-- Custom display for file name -->
                                           <div class="form-group">
                                             <label for="editListingPic">Listing Pic</label>
+                                            <br>
                                             <?php
                                             $obj = json_decode($row["pic"]);
                                             foreach ($obj as $key => $value) {

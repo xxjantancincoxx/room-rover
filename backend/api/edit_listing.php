@@ -30,6 +30,9 @@ if (isset($_POST['listingId'], $_POST['newLiName'], $_POST['newLiWal'], $_POST['
   $ewalletQrCode = null;
   $qr_temp_name = null;
 
+  $previous_data = "SELECT * FROM tbl_listings WHERE listing_id = '$listingId';";
+  $temp_result = mysqli_query($conn, $previous_data);
+  $result_previous = mysqli_fetch_assoc($temp_result);
 
   // $stmt = null;
 
@@ -84,21 +87,30 @@ if (isset($_POST['listingId'], $_POST['newLiName'], $_POST['newLiWal'], $_POST['
   if (isset($_FILES["ewallet_qr_code"])) {
     $ewalletQrCode = $_FILES["ewallet_qr_code"];
     $ewalletTarget = $folder . $ewalletQrCode["name"]; // Add this line to define $ewalletTarget
-    $qr_temp_name = $ewalletQrCode["tmp_name"];
+    $qr_temp_name = $ewalletQrCode["name"];
     move_uploaded_file($qr_temp_name, $ewalletTarget);
   }
 
   // File was not uploaded, update only other fields
   // $stmt = $pdo->prepare("UPDATE tbl_listings SET name = :newLiName, e_wallet = :newLiWal, location = :newLiLoc, price = :newPrice, rooms_Available = :newRooms, free_water_electric = :newWe, is_aircon = :newAircon, free_wifi = :newWifi, own_cr = :newOwnCr WHERE listing_id = :listingId");
   $sql = "UPDATE tbl_listings SET name = '$newLiName', e_wallet = '$newLiWal', location = '$newLiLoc', price = '$newPrice', rooms_Available = '$newRooms', free_water_electric = '$newWe', is_aircon = '$newAircon', free_wifi = '$newWifi', own_cr = '$newOwnCr' ";
-  if (isset($pics_json)) $sql = $sql . ", pic = '$pics_json' ";
-  if (isset($qr_temp_name)) $sql = $sql . ", qr_pic = '$qr_temp_name'";
+  if (isset($_FILES['editListingPic'])) {
+    $sql = $sql . ", pic = '$pics_json' ";
+  } else {
+    $sql = $sql . ", pic = '" . $result_previous["pic"] . "' ";
+  }
+
+  if (isset($qr_temp_name)) {
+    $sql = $sql . ", qr_pic = '$qr_temp_name'";
+  } else {
+    $sql = $sql . ", pic = '" . $result_previous["qr_pic"] . "' ";
+  }
   $sql = $sql . " WHERE listing_id = '$listingId';";
 
   // $result = mysqli_query($conn, $sql);
 
   if ($conn->query($sql) === TRUE) {
-    header("Location: ../../owner/my_listings.php?session=" . $_SESSION["session_id"]);
+    //header("Location: ../../owner/my_listings.php?session=" . $_SESSION["session_id"]);
     exit();
   } else {
     echo "Failed!";

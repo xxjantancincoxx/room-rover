@@ -1,92 +1,46 @@
-<div class="container">
+<?php
+
+require_once('backend/DBconn.php');
+
+$listingsSql = "SELECT * FROM tbl_listings LIMIT 3";
+$temp_result = mysqli_query($conn, $listingsSql);
+?>
+
+<div class="container mb-5">
 
   <div class="section-heading">
     <h2>Available Boarding Houses</h2>
   </div>
-  <!-- Card deck -->
-  <div class="card-deck mt-4">
 
-    <!-- Card -->
-    <div class="card mb-4">
+  <div class="row">
+    <?php
+    while ($row = mysqli_fetch_assoc($temp_result)) {
+      $obj = json_decode($row["pic"]);
+      $pic1 = null;
+      foreach ($obj as $key => $value) {
+        $pic1 = $value;
+        break;
+      }
+      $src = "/room-rover/backend/api/uploads/OWNER" . $row['owner_id'] . "/" . $pic1;
+    ?>
+      <div class="col col-sm-4">
+        <div class="card pb-0" style="width: 18rem;height: auto;">
+          <img class="card-img-top border-bottom" width="286" height="180" src="<?php echo $src; ?>" alt="<?php echo $row["name"]; ?>">
+          <div class="card-body pb-0 mb-0">
+            <h5 class="card-title"><?php echo $row["name"]; ?></h5>
+            <ul style="list-style-type:disc;">
+              <li>Location: <?php echo $row["location"]; ?></li>
+              <li>Price: <?php echo $row["price"]; ?></li>
+              <li>Rooms Available: <?php echo $row["rooms_Available"]; ?></li>
+              <li>Date: <?php echo $row["date_added"]; ?></li>
 
-      <!--Card image-->
-      <div class="view overlay">
-        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.webp" alt="Card image cap">
-        <a href="#!">
-          <div class="mask rgba-white-slight"></div>
-        </a>
+            </ul>
+            
+            <div style="position: absolute; bottom: 20; width: 85%;"><a href="login.php" class="btn btn-primary btn-block">View More Details</a></div>
+          </div>
+        </div>
       </div>
-
-      <!--Card content-->
-      <div class="card-body d-flex flex-column">
-
-        <!--Title-->
-        <h4 class="card-title">Card title</h4>
-        <!--Text-->
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-        <button type="button" class="btn btn-secondary btn-md mt-auto">Read more</button>
-
-      </div>
-
-    </div>
-    <!-- Card -->
-
-    <!-- Card -->
-    <div class="card mb-4">
-
-      <!--Card image-->
-      <div class="view overlay">
-        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/14.webp" alt="Card image cap">
-        <a href="#!">
-          <div class="mask rgba-white-slight"></div>
-        </a>
-      </div>
-
-      <!--Card content-->
-      <div class="card-body d-flex flex-column">
-
-        <!--Title-->
-        <h4 class="card-title">Card title</h4>
-        <!--Text-->
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-        <button type="button" class="btn btn-secondary btn-md mt-auto">Read more</button>
-
-      </div>
-
-    </div>
-    <!-- Card -->
-
-    <!-- Card -->
-    <div class="card mb-4">
-
-      <!--Card image-->
-      <div class="view overlay">
-        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/15.webp" alt="Card image cap">
-        <a href="#!">
-          <div class="mask rgba-white-slight"></div>
-        </a>
-      </div>
-
-      <!--Card content-->
-      <div class="card-body d-flex flex-column">
-
-        <!--Title-->
-        <h4 class="card-title">Card title</h4>
-        <!--Text-->
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-        <button type="button" class="btn btn-secondary btn-md mt-auto">Read more</button>
-
-      </div>
-
-    </div>
-    <!-- Card -->
-
+    <?php } ?>
   </div>
   <!-- Card deck -->
 </div>

@@ -4,8 +4,21 @@
 
 session_start();
 
+if (isset($_SESSION["username"])) {
+  if ($_SESSION["user_type"] === "boarder") {
+      header("Location: /room-rover/boarder?session=" . $_SESSION["session"]);
+      exit();
+  } else if ($_SESSION["user_type"] === "owner") {
+      header("Location: /room-rover/owner?session=" . $_SESSION["session"]);
+      exit();
+  } else if ($_SESSION["user_type"] === "admin") {
+      header("Location: /room-rover/admin?session=" . $_SESSION["session"]);
+      exit();
+  }
+}
+
 if (!isset($_SESSION["id"])) {
-  header("Location: ../index.php");
+  header("Location: ../login.php");
   exit();
 }
 
