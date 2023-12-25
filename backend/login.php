@@ -32,6 +32,16 @@ $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) === 1) {
 	$row = mysqli_fetch_assoc($result);
+	if ($row["status"] === "pending") {
+		$_SESSION['error'] = 'Account is still pending!';
+		header("Location: ../login.php");
+		exit();
+	} else if ($row["status"] === "inactive") {
+		$_SESSION['error'] = 'Account has been deactivated by admin!';
+		header("Location: ../login.php");
+		exit();
+	}
+
 	if ($row["username"] === $username && $row["password"] === $hashed_pass) {
 		$payload = [
 			'iss' => "localhost",
@@ -49,7 +59,7 @@ if (mysqli_num_rows($result) === 1) {
 		$_SESSION['session_id'] = $row["session_id"];
 		$_SESSION['id'] = $row["id"];
 
-		echo "<script>console.log(" . $jwt . ");</script>" ;
+		echo "<script>console.log(" . $jwt . ");</script>";
 		if ($row['user_type'] === "owner") {
 			$url = 'Location: ../owner?session=' . $jwt;
 			header($url);

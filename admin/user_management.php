@@ -88,9 +88,10 @@ include('header.php')
     location.reload();
   });
 
-  $(".approve").click(function() {
+  $(".approve").click(function(e) {
     $.post("../backend/api/update_status.php", {
-        status: "approve"
+        status: "approve",
+        id: e.target.previousElementSibling.value
       },
       function(data, status) {
         jQuery.noConflict();
@@ -98,9 +99,10 @@ include('header.php')
       });
   });
 
-  $(".deactivate").click(function() {
+  $(".deactivate").click(function(e) {
     $.post("../backend/api/update_status.php", {
-        status: "deactivate"
+        status: "deactivate",
+        id: e.target.previousElementSibling.value
       },
       function(data, status) {
         jQuery.noConflict();
@@ -108,9 +110,10 @@ include('header.php')
       });
   });
 
-  $(".activate").click(function() {
+  $(".activate").click(function(e) {
     $.post("../backend/api/update_status.php", {
-        status: "activate"
+        status: "activate",
+        id: e.target.previousElementSibling.value
       },
       function(data, status) {
         jQuery.noConflict();
