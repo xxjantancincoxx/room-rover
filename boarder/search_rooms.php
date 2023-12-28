@@ -175,7 +175,7 @@ $resultset = $conn->query($sql1);
           }
         ?>
           <div class="card mr-2 mb-2 holder-card" id="holder-card" style="width:350px">
-            <img class="card-img-top" src="<?php echo "../backend/api/uploads/OWNER" . $record["owner_id"] . "/" . $pic1; ?>" alt="Card image" style="width:100%">
+            <img class="card-img-top" src="<?php echo "../backend/api/uploads/OWNER" . $record["owner_id"] . "/" . $pic1; ?>" alt="Card image"  style="width:100%;height: 200px;">
             <div class="card-body">
               <h4 class="card-title"><?php echo $record["name"]; ?></h4>
               <ul style="list-style-type:disc">
@@ -402,12 +402,12 @@ $resultset = $conn->query($sql1);
             <input type="text" class="form-control" id="accountName" name="accountName" placeholder="John Doe" required>
           </div>
 
-          <div class="form-group acc_num">
+          <div id="acc_num" class="form-group acc_num">
             <label for="accountNumber">Account Number:</label>
             <input type="text" class="form-control" id="accountNumber" name="accountNumber" placeholder="0914567890" required>
           </div>
 
-          <div class="form-group ref_num">
+          <div id="ref_num" class="form-group ref_num">
             <label for="referenceNumber">Reference Number:</label>
             <input type="text" class="form-control" id="referenceNumber" name="referenceNumber" placeholder="7016..." required>
           </div>
@@ -447,13 +447,11 @@ $resultset = $conn->query($sql1);
       $(".ref_num").hide();
 
       $("#eWallet").change(function() {
-
-        if ($(this).val() == "Gcash") {
+        if ($(this).val().toLowerCase() === "gcash") {
           $(".acc_num").show();
           $(".ref_num").show();
-          // $(".no").hide();
         }
-        if ($(this).val() == "Cash") {
+        if ($(this).val() === "Cash") {
           $(".acc_num").hide();
           $(".ref_num").hide();
         }
