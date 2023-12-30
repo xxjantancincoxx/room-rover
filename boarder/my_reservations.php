@@ -28,7 +28,7 @@ include('header.php') ?>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xl-12 col-xxl-12">
+					<div class="col-xl-12 col-xxl-12 mb-3">
 						<div class="row">
 							<div class="col-xl-4 col-lg-6 col-sm-6">
 								<div class="widget-stat card bg-info">
@@ -168,6 +168,8 @@ include('header.php') ?>
 	<!-- SweetAlert JS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+	<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
 	<script>
 		$(document).ready(function() {
@@ -237,9 +239,7 @@ include('header.php') ?>
 
 	<script>
 		$(document).ready(function() {
-			$('#reserve').DataTable({
-
-			});
+			$('#reserve').DataTable({});
 		});
 	</script>
 
