@@ -110,7 +110,7 @@ if (isset($_POST['listingId'], $_POST['newLiName'], $_POST['newLiWal'], $_POST['
   // $result = mysqli_query($conn, $sql);
 
   if ($conn->query($sql) === TRUE) {
-    //header("Location: ../../owner/my_listings.php?session=" . $_SESSION["session_id"]);
+    header("Location: ../../owner/my_listings.php?session=" . $_SESSION["session_id"]);
     exit();
   } else {
     echo "Failed!";

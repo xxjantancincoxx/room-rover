@@ -20,5 +20,8 @@
     <li id="analytivs-reports-sidebar">
 			<?php echo "<a href=\"analytics_reports.php?session=" . $_SESSION["session"] . "\"><p class=\"pr-0\"><i class=\"fas fa-search-plus mr-1 pr-0\"></i>Analytics & Reports</p></a>" ?>
 		</li>
+    <li id="analytivs-reports-sidebar">
+			<?php echo "<a href=\"notification.php?session=" . $_SESSION["session"] . "\"><p class=\"pr-0\"><i class=\"fas fa-bell mr-1 pr-0\"></i>Notifications</p></a>" ?>
+		</li>
 	</ul>
 </nav>

@@ -23,7 +23,7 @@ $result = mysqli_fetch_assoc($temp_result_count);
 
 
 //table reservations
-$sql = "SELECT r.rs_id, r.lid, r.uid,r.num_Rooms, r.status, r.date_created,
+$sql = "SELECT r.rs_id, r.lid, r.uid,r.num_Rooms, r.status, r.date_created, r.stay,
 				l.listing_id, l.name, l.owner_id, l.price, l.is_aircon, l.free_water_electric, l.free_wifi, l.own_cr, l.pic, l.date_added,
 				p.payment_id, p.ewallet, p.e_accountName, p.e_accountNumber, p.referenceNo, p.amountPaid, p.payment_date
 				FROM tbl_reservations r
@@ -89,23 +89,24 @@ $temp_result_reserve = mysqli_query($conn, $sql);
                   <div class="card-body">
                     <div class="table-responsive">
                       <table id="reservations" class="table table-bordered">
-                        <thead>
-                          <tr>
+                        <thead >
+                          <tr >
                             <!-- <th>Listing</th> -->
-                            <th>Status</th>
-                            <th>Rooms</th>
-                            <th>Name</th>
-                            <th>Price</th>
+                            <th style="font-size: 0.9375rem !important;">Status</th>
+                            <th style="font-size: 0.9375rem !important;">Rooms</th>
+                            <th style="font-size: 0.9375rem !important;">Name</th>
+                            <th style="font-size: 0.9375rem !important;">Stay (Months)</th>
+                            <th style="font-size: 0.9375rem !important;">Price</th>
                             <!-- <th>E-wallet</th> -->
-                            <th>Account Name</th>
+                            <th style="font-size: 0.9375rem !important;">Account Name</th>
                             <!-- <th>Account Number</th>
 														<th>Reference Number</th>
 														<th>Amount Paid</th>
 														<th>Date Paid</th>
 														<th>Total Amount</th>
 														<th>Image</th> -->
-                            <th>Date Added</th>
-                            <th>Actions</th>
+                            <th style="font-size: 0.9375rem !important;">Date Added</th>
+                            <th style="font-size: 0.9375rem !important;">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -120,6 +121,8 @@ $temp_result_reserve = mysqli_query($conn, $sql);
                               echo "<td>" . ($row['status'] == 1 ? 'Approved' : 'Pending') . "</td>";
                               echo "<td>{$row['num_Rooms']}</td>";
                               echo "<td>{$row['name']}</td>";
+                              echo "<td>{$row['stay']}</td>";
+
                               echo "<td>₱" . number_format($row['price']) . "</td>";
 
                               // echo "<td>{$row['ewallet']}</td>";
@@ -163,7 +166,10 @@ $temp_result_reserve = mysqli_query($conn, $sql);
     </div>
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" /> -->
+    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script>
       $(document).ready(function() {
         // DataTable initialization
@@ -209,7 +215,10 @@ $temp_result_reserve = mysqli_query($conn, $sql);
               title: 'Reservation Updated Successfully',
               showConfirmButton: false,
               timer: 1500
-            });
+            }).then(() => {
+              // Reload the page
+              window.location.reload();
+            });;
           } else {
             console.error('Error updating status:', response.error);
             Swal.fire({

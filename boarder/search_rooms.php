@@ -129,6 +129,13 @@ $resultset = $conn->query($sql1);
 
       <?php include('navbar.php') ?>
 
+      <div class="container-fluid">
+        <div class="alert alert-container" role="alert">
+          <h3 class="text-secondary font-weight-bold" style="font-size:1.5rem;">Welcome!</h3>
+          <div>Dashboard Panel</div>
+        </div>
+      </div>
+
 
       <!-- row -->
       <!-- Search bar -->
@@ -175,7 +182,7 @@ $resultset = $conn->query($sql1);
           }
         ?>
           <div class="card mr-2 mb-2 holder-card" id="holder-card" style="width:350px">
-            <img class="card-img-top" src="<?php echo "../backend/api/uploads/OWNER" . $record["owner_id"] . "/" . $pic1; ?>" alt="Card image"  style="width:100%;height: 200px;">
+            <img class="card-img-top" src="<?php echo "../backend/api/uploads/OWNER" . $record["owner_id"] . "/" . $pic1; ?>" alt="Card image" style="width:100%;height: 200px;">
             <div class="card-body">
               <h4 class="card-title"><?php echo $record["name"]; ?></h4>
               <ul style="list-style-type:disc">
@@ -193,13 +200,10 @@ $resultset = $conn->query($sql1);
                 </li>
               </ul>
               <a data-toggle="modal" data-target="#viewDetailsModal<?php echo $record["listing_id"] ?>" class="btn btn-reserve btn-sm btn-primary">View Details</a>
-              <a class="btn btn-secondary btn-reserve btn-sm reserve-button" data-toggle="modal" data-target="#reserveModal" data-card-id="<?php echo $record['listing_id']; ?>" data-card-name="<?php echo $record['name']; ?>" data-card-loc="<?php echo $record['location']; ?>" data-card-price="<?php echo '₱' . $record['price']; ?>" data-card-condition="<?php echo $record['is_aircon'] ? 'Air Conditioned' : 'No Air Condition'; ?>" data-card-water-electric="<?php echo $record['free_water_electric'] ? 'Free Water and Electric' : 'No Free Water and Electric'; ?>" data-card-wifi="<?php echo $record['free_wifi'] ? 'Free WiFi' : 'No Free WiFi'; ?>" data-card-own-cr="<?php echo $record['own_cr'] ? 'Own CR' : 'No Own CR'; ?>" data-card-rooms-available="<?php echo $record['rooms_Available']; ?>">
+              <a class="btn btn-secondary btn-reserve btn-sm reserve-button" data-toggle="modal" data-target="#reserveModal" data-card-id="<?php echo $record['listing_id']; ?>" data-card-name="<?php echo $record['name']; ?>" data-card-loc="<?php echo $record['location']; ?>" data-card-price="<?php echo $record['price']; ?>" data-card-condition="<?php echo $record['is_aircon'] ? 'Air Conditioned' : 'No Air Condition'; ?>" data-card-water-electric="<?php echo $record['free_water_electric'] ? 'Free Water and Electric' : 'No Free Water and Electric'; ?>" data-card-wifi="<?php echo $record['free_wifi'] ? 'Free WiFi' : 'No Free WiFi'; ?>" data-card-own-cr="<?php echo $record['own_cr'] ? 'Own CR' : 'No Own CR'; ?>" data-card-rooms-available="<?php echo $record['rooms_Available']; ?>">
                 Reserve
               </a>
-              <!-- Review Button -->
-              <button class="btn btn-info btn-success btn-sm review-button" data-toggle="modal" data-target="#reviewModal" data-card-id="<?php echo $record['listing_id']; ?>" data-card-name="<?php echo $record['name']; ?>">
-                Review
-              </button>
+
             </div>
           </div>
 
@@ -311,47 +315,7 @@ $resultset = $conn->query($sql1);
   </div>
 
 
-  <!-- Review modal -->
-  <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2 class="modal-title" id="reviewModalLabel">Leave a Review</h2>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <!-- Review Form Section -->
-          <form id="reviewForm" method="post" action="">
-            <!-- Add a hidden input field to store the listing ID -->
-            <input type="hidden" id="listingIdReview" name="listingIdReview" value="">
-            <!-- Other review details can be added here -->
-            <div class="form-group">
-              <label for="reviewText">Your Review:</label>
-              <textarea class="form-control" id="reviewText" name="reviewText" rows="4" required></textarea>
-            </div>
-            <div class="form-group">
-              <label for="rating">Rating:</label>
-              <select class="form-control" id="rating" name="rating" required>
-                <option value="5">5 - Excellent</option>
-                <option value="4">4 - Very Good</option>
-                <option value="3">3 - Good</option>
-                <option value="2">2 - Fair</option>
-                <option value="1">1 - Poor</option>
-              </select>
-            </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Submit Review</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </form>
-        </div>
 
-      </div>
-    </div>
-  </div>
-  <!--end Review modal -->
   <!-- Modal -->
   <div class="modal fade" id="reserveModal" tabindex="-1" role="dialog" aria-labelledby="reserveModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -367,7 +331,7 @@ $resultset = $conn->query($sql1);
 
           <div class="form-group">
             <label for="numberOfRooms">Number of Rooms:</label>
-            <input type="number" class="form-control" id="numberOfRooms" name="numberOfRooms" placeholder="2" required>
+            <input type="number" class="form-control" id="numberOfRooms" name="numberOfRooms" required>
           </div>
 
           <!-- Add the hidden input field for rooms available -->
@@ -375,7 +339,7 @@ $resultset = $conn->query($sql1);
 
 
           <!-- Total Amount Section -->
-          <div class="row mb-3">
+          <div class="row mb-3" style="display:none" ;>
             <div class="col-md-12">
               <label for="totalAmount">Total Amount:</label>
               <!-- Display the calculated total amount here -->
@@ -399,28 +363,33 @@ $resultset = $conn->query($sql1);
 
           <div class="form-group">
             <label for="accountName">Account Name:</label>
-            <input type="text" class="form-control" id="accountName" name="accountName" placeholder="John Doe" required>
+            <input type="text" class="form-control" id="accountName" name="accountName" required>
           </div>
 
           <div id="acc_num" class="form-group acc_num">
             <label for="accountNumber">Account Number:</label>
-            <input type="text" class="form-control" id="accountNumber" name="accountNumber" placeholder="0914567890" required>
+            <input type="text" class="form-control" id="accountNumber" name="accountNumber" placeholder="09145678900" required>
           </div>
 
           <div id="ref_num" class="form-group ref_num">
             <label for="referenceNumber">Reference Number:</label>
-            <input type="text" class="form-control" id="referenceNumber" name="referenceNumber" placeholder="7016..." required>
+            <input type="text" class="form-control" id="referenceNumber" name="referenceNumber" required>
+          </div>
+
+          <div class="form-group">
+            <label for="amountPaid">Months to stay:</label>
+            <input type="number" class="form-control" id="stay" name="stay" required>
           </div>
 
           <div class="form-group">
             <label for="amountPaid">Amount Paid:</label>
-            <input type="number" class="form-control" id="amountPaid" name="amountPaid" placeholder="1000" required>
+            <input type="number" class="form-control" id="amountPaid" name="amountPaid" required>
           </div>
 
         </div>
         <!-- Update Modal Footer -->
         <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="close-modal-reserve" data-dismiss="modal">Close</button>
 
           <!-- Single form for reservation -->
           <!-- Inside the modal -->
@@ -619,6 +588,7 @@ $resultset = $conn->query($sql1);
             var accountNumber = $('#accountNumber').val();
             var referenceNumber = $('#referenceNumber').val();
             var amountPaid = $('#amountPaid').val();
+            var stay = $('#stay').val();
             var numberOfRooms = $('#numberOfRooms').val(); // Add this line to get the number of rooms
 
             // Send an AJAX request to the reserve.php file
@@ -633,23 +603,31 @@ $resultset = $conn->query($sql1);
                 accountNumber: accountNumber,
                 referenceNumber: referenceNumber,
                 amountPaid: amountPaid,
-                numberOfRooms: numberOfRooms // Include the number of rooms in the data
+                numberOfRooms: numberOfRooms, // Include the number of rooms in the data
+                stay: stay
 
               },
               dataType: 'json',
               success: function(response) {
                 if (response.success) {
                   // Close the modal after the reservation is completed
-                  $('#reserveModal').modal('hide');
 
                   // Success: Show SweetAlert success message
+                  // Swal.fire({
+                  //   icon: 'success',
+                  //   title: 'Success!',
+                  //   text: 'Reservation successfully added.',
+                  // });
+                  $("#close-modal-reserve").trigger("click");
+
                   Swal.fire({
                     icon: 'success',
                     title: 'Success!',
                     text: 'Reservation successfully added.',
+                  }).then(function() {
+
                   });
 
-                  window.location.reload();
                   // Reload the page after a short delay
                   // setTimeout(function() {
                   //   location.reload();
@@ -713,103 +691,7 @@ $resultset = $conn->query($sql1);
     }
   </script>
 
-  <script>
-    // Update review modal content when Review button is clicked
-    $('.review-button').click(function() {
-      var cardId = $(this).data('card-id');
-      $('#listingIdReview').val(cardId);
-    });
 
-    // Handle the review submission action
-    $('#reviewForm').submit(function(e) {
-      e.preventDefault();
-
-      // Retrieve the review details from the form
-      var listingIdReview = $('#listingIdReview').val();
-      var reviewText = $('#reviewText').val();
-      var rating = $('#rating').val();
-
-      // Perform your review submission logic here
-      // Example: sendAjaxRequestForReview(listingIdReview, reviewText, rating);
-
-      // Check if the user has already submitted a review for the selected listing
-      $.ajax({
-        type: 'POST',
-        url: '../backend/api/check_review.php', // Adjust the URL to your server-side script
-        data: {
-          listingIdReview: listingIdReview,
-          userId: <?php echo $userId; ?>,
-        },
-        dataType: 'json',
-        success: function(response) {
-          if (response.alreadyReviewed) {
-            // User has already submitted a review for this listing
-            Swal.fire({
-              icon: 'error',
-              title: 'Error!',
-              text: 'You have already submitted a review for this listing.',
-            });
-          } else {
-            // User has not submitted a review, proceed with the review submission
-            // Send an AJAX request to insert the review into the 'reviews' table
-            $.ajax({
-              type: 'POST',
-              url: '../backend/api/submit_review.php', // Adjust the URL to your server-side script
-              data: {
-                listingIdReview: listingIdReview,
-                reviewText: reviewText,
-                rating: rating
-              },
-              dataType: 'json',
-              success: function(response) {
-                if (response.success) {
-
-                  // Close the modal after the review is submitted
-                  $('#reviewModal').modal('hide');
-
-
-                  // Success: Show SweetAlert success message
-                  Swal.fire({
-                    icon: 'success',
-                    title: 'Review Submitted!',
-                    text: 'Your review has been successfully submitted.',
-                  });
-
-
-
-                  // Optionally, you can reload the page or update the reviews dynamically
-                  // Example: location.reload();
-                } else {
-                  // Error: Show SweetAlert error message
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: 'Error submitting the review. Please try again.',
-                  });
-                }
-              },
-              error: function() {
-                // Show SweetAlert error message for general errors
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Error!',
-                  text: 'Error occurred during the review submission.',
-                });
-              }
-            });
-          }
-        },
-        error: function() {
-          // Show SweetAlert error message for general errors
-          Swal.fire({
-            icon: 'error',
-            title: 'Error!',
-            text: 'Error checking review status.',
-          });
-        }
-      });
-    });
-  </script>
   <!-- Add this script at the end of your HTML -->
   <script>
     // Function to generate star indicator HTML based on the rating

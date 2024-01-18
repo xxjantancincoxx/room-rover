@@ -5,6 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lid = $_POST['listingId'];
     $uid = $_POST['userId'];
     $num_Rooms = $_POST['numberOfRooms'];
+    $stay = $_POST['stay'];
 
     // Check if the user already has an active reservation
     $sqlCheckReservation = "SELECT COUNT(*) as reserved FROM tbl_reservations WHERE uid = '$uid' AND status = 'Pending'";
@@ -24,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $status = 0;
 
         // Perform the reservation and get the reservation_id
-        $sqlInsertReservation = "INSERT INTO tbl_reservations (lid, uid, num_Rooms, status, date_created) VALUES ('$lid', '$uid', '$num_Rooms', '$status', DATE_FORMAT(NOW(), '%M %e, %Y'))";
+        $sqlInsertReservation = "INSERT INTO tbl_reservations (lid, uid, num_Rooms, status, date_created, stay) VALUES ('$lid', '$uid', '$num_Rooms', '$status', DATE_FORMAT(NOW(), '%M %e, %Y'), $stay)";
         mysqli_query($conn, $sqlInsertReservation);
         // $stmt = $pdo->prepare($sqlInsertReservation);
         // $stmt->bindParam(':lid', $lid);
