@@ -37,7 +37,7 @@ if (mysqli_num_rows($result) === 1) {
 		header("Location: ../login.php");
 		exit();
 	} else if ($row["status"] === "inactive") {
-		$_SESSION['error'] = 'Account has been deactivated by admin!';
+		$_SESSION['error'] = 'Account has been deactivated!';
 		header("Location: ../login.php");
 		exit();
 	}
